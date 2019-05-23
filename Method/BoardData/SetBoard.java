@@ -1,5 +1,7 @@
-class SetBoard extends MyEnum{
-	static void (Board[][] board){
+package Method.BoardData;
+
+public class SetBoard extends MyEnum{
+	static public void setboard(Board[][] board){
 		String coordinate = "";
 		for(int i = 0; i < 8; i++){
 			for(int j = 0; j < 8; j++){
@@ -16,7 +18,7 @@ class SetBoard extends MyEnum{
 				}
 				//とりあえず今はこれ
 				//あとで初期状態と初期状態のときに打てる場所を探すようにする。
-				board[i][j] = new Board(coordinate, State.Empty, false, false);1
+				board[i][j] = new Board(coordinate, State.Empty, false, false);
 			}
 		}
 	}

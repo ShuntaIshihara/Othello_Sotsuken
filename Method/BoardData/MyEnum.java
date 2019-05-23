@@ -1,4 +1,6 @@
-class MyEnum {
+package Method.BoardData;
+
+public class MyEnum {
 	protected enum State {
 		Empty(0),
 		Black(1),
@@ -6,7 +8,7 @@ class MyEnum {
 
 		private final int num;
 
-		private MyEnum(int num){
+		State(int num){
 			this.num = num;
 		}
 

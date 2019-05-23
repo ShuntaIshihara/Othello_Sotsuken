@@ -1,9 +1,11 @@
-class Board extends MyEnum{
-	String coordinate;			//座標
-	State state;				//マスの状態
-	boolean whiteNextMove;		//白が打てるかどうか
-	boolean blackNextMove;		//黒が打てるかどうか
-	int important;				//マスの重要性
+package Method.BoardData;
+
+public class Board extends MyEnum{
+	public String coordinate;			//座標
+	public State state;				//マスの状態
+	public boolean whiteNextMove;		//白が打てるかどうか
+	public boolean blackNextMove;		//黒が打てるかどうか
+	public int important;				//マスの重要性
 
 	Board(String coordinate, State state, boolean whiteNextMove, boolean blackNextMove){
 		this.coordinate = coordinate;

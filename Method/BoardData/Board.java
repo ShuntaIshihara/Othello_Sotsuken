@@ -5,13 +5,13 @@ public class Board extends MyEnum{
 	public State state;				//マスの状態
 	public boolean whiteNextMove;		//白が打てるかどうか
 	public boolean blackNextMove;		//黒が打てるかどうか
-	public int important;				//マスの重要性
+	public double importance;				//マスの重要性
 
-	Board(String coordinate, State state, boolean whiteNextMove, boolean blackNextMove){
+	Board(String coordinate, State state, boolean whiteNextMove, boolean blackNextMove, double importance){
 		this.coordinate = coordinate;
 		this.state = state;
 		this.whiteNextMove = whiteNextMove;
 		this.blackNextMove = blackNextMove;
-		int important = 0; //後で重要度を設定する。
+		this.importance = importance;
 	}
 }

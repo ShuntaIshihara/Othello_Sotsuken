@@ -74,13 +74,25 @@ class Main extends MyEnum{
 				System.out.print(" " + board[i][j].coordinate);
 			System.out.println();
 		}
-		/*System.out.println("黒の位置");
-		System.out.println("白の位置");
+		System.out.println();
+		System.out.println("黒と白の初期位置");
 		for(int i = 0; i < 8; i++){
 			for(int j = 0; j < 8; j++){
-				if(
+				if(board[i][j].state == State.Black)
+					System.out.println(board[i][j].coordinate + " = black");
+				if(board[i][j].state == State.White)
+					System.out.println(board[i][j].coordinate + " = white");
 			}
-		}*/
+		}
+		System.out.println();
+		System.out.println("黒と白が打てるところ");
+		for(int i = 0; i < 8; i++)
+			for(int j = 0; j < 8; j++){
+				if(board[i][j].blackNextMove)
+					System.out.println("black can move to " + board[i][j].coordinate);
+				if(board[i][j].whiteNextMove)
+					System.out.println("white can move to " + board[i][j].coordinate);
+			}
 
 	}
 }

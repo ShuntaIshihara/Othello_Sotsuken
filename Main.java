@@ -1,6 +1,6 @@
 //import Method;
 import Method.BoardData.*;
-import Actionsystem.*;
+import Method.Actionsystem.*;
 
 
 class Main extends MyEnum{

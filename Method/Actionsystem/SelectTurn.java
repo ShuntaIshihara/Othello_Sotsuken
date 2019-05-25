@@ -1,4 +1,4 @@
-package Actionsystem;
+package Method.Actionsystem;
 
 import java.io.BufferedReader;
 import java.io.IOException;

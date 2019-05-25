@@ -12,7 +12,7 @@ public class SelectTurn {
 
 		String str = null;
 		do{
-			System.out.print("Which color is your disk Brack or White? (b/w)? : "); 
+			System.out.print("Which color is my disk Brack or White? (b/w)? : "); 
 			try{
 				str = br.readLine();
 				br.close();

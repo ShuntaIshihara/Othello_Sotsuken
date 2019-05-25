@@ -15,7 +15,7 @@ class Main extends MyEnum{
 		boolean white = SelectTurn.selectturn();
 
 		//SelectTurnテスト用コード
-		System.out.println(white);
+		//System.out.println(white);
 
 		String opponent = "";
 
@@ -24,7 +24,7 @@ class Main extends MyEnum{
 			//後手のとき
 //			if(white){
 				//相手の一手を入力する。
-//				opponent = InputOpponentMove.inputopponentmove();
+				opponent = InputOpponentMove.inputopponentmove();
 				//入力された相手の手の座標からboardを更新する。
 //				Setboard.setboard(board, opponent);
 				
@@ -71,6 +71,7 @@ class Main extends MyEnum{
 		//}
 		
 		//テスト用コード（入力とboardの初期化）
+		/*
 		System.out.println("boardの状態 座標を返す");
 		for(int i = 0; i < 8; i++){
 			for(int j = 0; j < 8; j++)
@@ -96,6 +97,7 @@ class Main extends MyEnum{
 				if(board[i][j].whiteNextMove)
 					System.out.println("white can move to " + board[i][j].coordinate);
 			}
+		*/
 
 	}
 }

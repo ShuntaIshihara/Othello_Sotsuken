@@ -1,6 +1,6 @@
 //import Method;
 import Method.BoardData.*;
-//import Actionsystem;
+import Actionsystem.*;
 
 
 class Main extends MyEnum{
@@ -12,7 +12,10 @@ class Main extends MyEnum{
 		//先手（黒）か後手（白）を選択する。
 		//先手のとき false
 		//後手のとき true
-//		boolean white = SelectTurn.selectturn();
+		boolean white = SelectTurn.selectturn();
+
+		//SelectTurnテスト用コード
+		System.out.println(white);
 
 		String opponent = "";
 

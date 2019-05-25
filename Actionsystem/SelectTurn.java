@@ -12,7 +12,7 @@ public class SelectTurn {
 
 		String str = null;
 		do{
-			System.out.println("Which color is your disk Brack or White? (b/w)?"); 
+			System.out.print("Which color is your disk Brack or White? (b/w)? : "); 
 			try{
 				str = br.readLine();
 				br.close();
@@ -21,7 +21,7 @@ public class SelectTurn {
 			}
 
 			//入力を間違えたときはもう一度やらせる
-		}while(!(str.equals("b")) && !(str.equals("w")))
+		}while(!(str.equals("b")) && !(str.equals("w")));
 
 		if(str.equals("w")) return true;
 		return false;

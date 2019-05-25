@@ -1,4 +1,4 @@
-package Method.Actionsystem;
+package Method;
 
 import java.util.Scanner;
 

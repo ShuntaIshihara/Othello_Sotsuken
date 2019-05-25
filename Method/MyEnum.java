@@ -1,4 +1,4 @@
-package Method.BoardData;
+package Method;
 
 public class MyEnum {
 	protected enum State {

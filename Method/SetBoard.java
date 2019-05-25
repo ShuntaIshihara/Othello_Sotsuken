@@ -1,4 +1,4 @@
-package Method.BoardData;
+package Method;
 
 public class SetBoard extends MyEnum{
 	static public void setboard(Board[][] board){

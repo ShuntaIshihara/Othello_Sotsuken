@@ -1,7 +1,4 @@
 import Method.*;
-import Method.BoardData.*;
-import Method.Actionsystem.*;
-
 
 class Main extends MyEnum{
 	public static void main(String[] args){

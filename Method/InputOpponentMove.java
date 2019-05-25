@@ -1,4 +1,4 @@
-package Method.BoardData;
+package Method;
 
 import java.util.Scanner;
 

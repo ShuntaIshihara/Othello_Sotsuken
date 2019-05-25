@@ -1,4 +1,4 @@
-package Method.BoardData;
+package Method;
 
 public class Board extends MyEnum{
 	public String coordinate;			//座標

@@ -1,4 +1,4 @@
-//import Method;
+import Method.*;
 import Method.BoardData.*;
 import Method.Actionsystem.*;
 
@@ -15,7 +15,7 @@ class Main extends MyEnum{
 		boolean white = SelectTurn.selectturn();
 
 		//SelectTurnテスト用コード
-		//System.out.println(white);
+		System.out.println(white);
 
 		String opponent = "";
 
@@ -24,7 +24,10 @@ class Main extends MyEnum{
 			//後手のとき
 //			if(white){
 				//相手の一手を入力する。
-				opponent = InputOpponentMove.inputopponentmove();
+				opponent = InputOpponentMove.inputopponentmove(board, !white);
+				//InputOpponentMoveテスト用コード
+				System.out.println(opponent);
+
 				//入力された相手の手の座標からboardを更新する。
 //				Setboard.setboard(board, opponent);
 				

@@ -93,4 +93,114 @@ public class SetBoard extends MyEnum{
 			}
 		}
 	}
+
+	public static void setboard(Board[][] board, String coordinate, boolean white){
+		//指定された座標に石を置く
+		//coordinateをchar型に変換し、それをint型に変換してboardのインデックスを得る
+		char[] c = coordinate.toCharArray();
+		int row = c[0] - 'a';
+		int line = c[1] - '1';
+		
+		//ひっくり返す
+		if(white){
+			//置かれたマスの状態を変更する。
+			board[line][row].state = State.White;
+
+			for(int i = -1; i < 1; i++){
+				for(int j = -1; j < 1; j++){
+					//自分のマスのときは飛ばす。
+					if(i == 0 && j == 0) continue;
+
+					if(board[line+i][row+j].state == State.Black){
+						boolean check = false;
+						int x = i;
+						int y = j;
+						while(true){
+							//行が変わるとき
+							if(i == -1) 	x--;
+							if(i == 1)		x++;
+
+							//列が変わるとき
+							if(j == -1)		y--;
+							if(j == 1)		y++;
+
+							if(x >= 0 && x < 8 && y >= 0 && y < 8){ //配列の範囲内
+								if(board[line+x][row+y].state == State.Black) 
+									continue;//黒だったら隣のマスに移動
+								if(board[line+x][row+y].state == State.White){
+									check = true;
+									break;
+								}
+								break;
+							}else{
+								break;
+							}
+						}
+
+						//ひっくり返せるとき
+						if(check){
+							int i1 = i;
+							int j1 = j;
+							while(i1 == x && j1 == y){
+								board[line+i1][row+j1].state = State.White;
+
+								if(i == -1)	i1--;
+								if(i == 1)	i1++;
+								if(j == -1)	j1--;
+								if(j == 1)	j1++;
+							}
+						}
+					}
+				}
+			}
+		}else{
+			board[line][row].state = State.Black;
+			for(int i = -1; i < 1; i++){
+				for(int j = -1; j < 1; j++){
+					//自分のマスのときは飛ばす。
+					if(i == 0 && j == 0) continue;
+
+					if(board[line+i][row+j].state == State.White){
+						boolean check = false;
+						int x = i;
+						int y = j;
+						while(true){
+							if(i == -1)		x--;
+							if(i == 1)		x++;
+							if(j == -1)		y--;
+							if(j == 1)		y++;
+
+							if((line+x) >= 0 && (line+x) < 8 && (row+y) >= 0 && (row+y) < 8){ //配列の範囲内
+								if(board[line+x][row+y].state == State.White) 
+									continue;
+								if(board[line+x][row+y].state == State.Black){
+//									System.out.println(x + " " + y);
+									check = true;
+									break;
+								}
+								break;
+							}else{
+								break;
+							}
+						}
+
+						//ひっくり返せるとき
+						if(check){
+							int i1 = i;
+							int j1 = j;
+							while(i1 != x || j1 != y){
+//								System.out.println(i1 + " " + j1);
+								board[line+i1][row+j1].state = State.Black;
+								if(i == -1)	i1--;
+								if(i == 1)	i1++;
+								if(j == -1)	j1--;
+								if(j == 1)	j1++;
+							}
+						}
+//						System.out.println(x + " " + y);
+					}
+				}
+			}
+		}
+	}
 }

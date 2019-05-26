@@ -26,7 +26,7 @@ class Main extends MyEnum{
 //				System.out.println(opponent);
 
 				//入力された相手の手の座標からboardを更新する。
-//				Setboard.setboard(board, opponent);
+				SetBoard.setboard(board, opponent, !white);
 				
 				//---------------------------------------------
 				//AlphaBetaメソッドを呼び出して最適解を見つける。
@@ -40,7 +40,7 @@ class Main extends MyEnum{
 
 				//---------------------------------------------
 				//boardを更新する。
-
+//				SetBoard.setboard(board, my, white);
 				//---------------------------------------------
 //			}else{//先手のとき
 								
@@ -71,7 +71,7 @@ class Main extends MyEnum{
 		//}
 		
 		//テスト用コード（入力とboardの初期化）
-		/*
+		
 		System.out.println("boardの状態 座標を返す");
 		for(int i = 0; i < 8; i++){
 			for(int j = 0; j < 8; j++)
@@ -89,7 +89,7 @@ class Main extends MyEnum{
 			}
 		}
 		System.out.println();
-		System.out.println("黒と白が打てるところ");
+		/*System.out.println("黒と白が打てるところ");
 		for(int i = 0; i < 8; i++)
 			for(int j = 0; j < 8; j++){
 				if(board[i][j].blackNextMove)

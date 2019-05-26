@@ -89,7 +89,7 @@ class Main extends MyEnum{
 			}
 		}
 		System.out.println();
-		/*System.out.println("黒と白が打てるところ");
+		System.out.println("黒と白が打てるところ");
 		for(int i = 0; i < 8; i++)
 			for(int j = 0; j < 8; j++){
 				if(board[i][j].blackNextMove)
@@ -97,7 +97,6 @@ class Main extends MyEnum{
 				if(board[i][j].whiteNextMove)
 					System.out.println("white can move to " + board[i][j].coordinate);
 			}
-		*/
 
 	}
 }

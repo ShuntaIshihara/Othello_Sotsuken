@@ -68,23 +68,13 @@ public class SetBoard extends MyEnum{
 								break;
 
 					//黒が打てるところ
-					case "d3" : board[i][j] = new Board(coordinate, State.Empty, false, true, 0);
+					case "d3" : board[i][j] = new Board(coordinate, State.Empty, false, true, 0, null, "d5", null, null);
 								break;
-					case "c4" : board[i][j] = new Board(coordinate, State.Empty, false, true, 0);
+					case "c4" : board[i][j] = new Board(coordinate, State.Empty, false, true, 0, null, null, null, "e4");
 								break;
-					case "f5" : board[i][j] = new Board(coordinate, State.Empty, false, true, 0);
+					case "f5" : board[i][j] = new Board(coordinate, State.Empty, false, true, 0, null, null, "d5", null);
 								break;
-					case "e6" : board[i][j] = new Board(coordinate, State.Empty, false, true, 0);
-								break;
-
-					//白が打てるところ
-					case "e3" : board[i][j] = new Board(coordinate, State.Empty, true, false, 0);
-								break;
-					case "f4" : board[i][j] = new Board(coordinate, State.Empty, true, false, 0);
-								break;
-					case "d6" : board[i][j] = new Board(coordinate, State.Empty, true, false, 0);
-								break;
-					case "c5" : board[i][j] = new Board(coordinate, State.Empty, true, false, 0);
+					case "e6" : board[i][j] = new Board(coordinate, State.Empty, false, true, 0, "e4", null, null, null);
 								break;
 
 					//その他
@@ -95,109 +85,309 @@ public class SetBoard extends MyEnum{
 	}
 
 	public static void setboard(Board[][] board, String coordinate, boolean white){
-		//指定された座標に石を置く
-		//coordinateをchar型に変換し、それをint型に変換してboardのインデックスを得る
-		char[] c = coordinate.toCharArray();
-		int row = c[0] - 'a';
-		int line = c[1] - '1';
-		
-		//ひっくり返す
-		if(white){
-			//置かれたマスの状態を変更する。
+		//指定された座標（文字列）をIndex（数字）に変換する。
+		char[] ch = coordinate.toCharArray();
+		int line = ch[1] - '1';
+		int row = ch[0] - 'a';
+
+		if(white){ //白のとき
+			//指定された座標に石を置く
 			board[line][row].state = State.White;
 
-			for(int i = -1; i < 1; i++){
-				for(int j = -1; j < 1; j++){
-					//自分のマスのときは飛ばす。
-					if(i == 0 && j == 0) continue;
-
-					if(board[line+i][row+j].state == State.Black){
-						boolean check = false;
-						int x = i;
-						int y = j;
-						while(true){
-							//行が変わるとき
-							if(i == -1) 	x--;
-							if(i == 1)		x++;
-
-							//列が変わるとき
-							if(j == -1)		y--;
-							if(j == 1)		y++;
-
-							if(x >= 0 && x < 8 && y >= 0 && y < 8){ //配列の範囲内
-								if(board[line+x][row+y].state == State.Black) 
-									continue;//黒だったら隣のマスに移動
-								if(board[line+x][row+y].state == State.White){
-									check = true;
-									break;
-								}
-								break;
-							}else{
-								break;
-							}
-						}
-
-						//ひっくり返せるとき
-						if(check){
-							int i1 = i;
-							int j1 = j;
-							while(i1 == x && j1 == y){
-								board[line+i1][row+j1].state = State.White;
-
-								if(i == -1)	i1--;
-								if(i == 1)	i1++;
-								if(j == -1)	j1--;
-								if(j == 1)	j1++;
-							}
-						}
-					}
+			//ひっくり返す。
+			if(board[line][row].up != null){
+				int i = -1;
+				ch = board[line][row].up.toCharArray();
+				int x = ch[1] - '1';
+				int y = ch[0] - 'a';
+				while(i!=x){
+					board[line+i][row].state = State.White;
+					i--;
 				}
 			}
-		}else{
-			board[line][row].state = State.Black;
-			for(int i = -1; i < 1; i++){
-				for(int j = -1; j < 1; j++){
-					//自分のマスのときは飛ばす。
-					if(i == 0 && j == 0) continue;
+			if(board[line][row].up_left != null){
+				int i = -1;
+				int j = -1; 
+				ch = board[line][row].up.toCharArray();
+				int x = ch[1] - '1';
+				int y = ch[0] - 'a';
+				while(i!=x || j!=y){
+					board[line+i][row+j].state = State.White;
+					i--;
+					j--;
+				}
+			}
+			if(board[line][row].up_right != null){
+				int i = -1;
+				int j = 1; 
+				ch = board[line][row].up.toCharArray();
+				int x = ch[1] - '1';
+				int y = ch[0] - 'a';
+				while(i!=x || j!=y){
+					board[line+i][row+j].state = State.White;
+					i--;
+					j++;
+				}
+			}
+			if(board[line][row].left != null){
+				int j = -1; 
+				ch = board[line][row].up.toCharArray();
+				int x = ch[1] - '1';
+				int y = ch[0] - 'a';
+				while(j!=y){
+					board[line][row+j].state = State.White;
+					j--;
+				}
+			}
+			if(board[line][row].right != null){
+				int j = 1; 
+				ch = board[line][row].up.toCharArray();
+				int x = ch[1] - '1';
+				int y = ch[0] - 'a';
+				while(j!=y){
+					board[line][row+j].state = State.White;
+					j++;
+				}
+			}
+			if(board[line][row].down != null){
+				int i = 1; 
+				ch = board[line][row].up.toCharArray();
+				int x = ch[1] - '1';
+				int y = ch[0] - 'a';
+				while(i!=x){
+					board[line+i][row].state = State.White;
+					i++;
+				}
+			}
+			if(board[line][row].down_left != null){
+				int i = 1;
+				int j = -1; 
+				ch = board[line][row].up.toCharArray();
+				int x = ch[1] - '1';
+				int y = ch[0] - 'a';
+				while(i!=x || j!=y){
+					board[line+i][row+j].state = State.White;
+					i++;
+					j--;
+				}
+			}
+			if(board[line][row].down_right != null){
+				int i = 1;
+				int j = 1; 
+				ch = board[line][row].up.toCharArray();
+				int x = ch[1] - '1';
+				int y = ch[0] - 'a';
+				while(i!=x || j!=y){
+					board[line+i][row+j].state = State.White;
+					i++;
+					j++;
+				}
+			}
+		}else{ //黒のとき
+			//指定された座標に石を置く
+			board[line][row].state = State.White;
 
-					if(board[line+i][row+j].state == State.White){
-						boolean check = false;
-						int x = i;
-						int y = j;
-						while(true){
-							if(i == -1)		x--;
-							if(i == 1)		x++;
-							if(j == -1)		y--;
-							if(j == 1)		y++;
+			//ひっくり返す。
+			if(board[line][row].up != null){
+				int i = -1;
+				ch = board[line][row].up.toCharArray();
+				int x = ch[1] - '1';
+				int y = ch[0] - 'a';
+				while(i!=x){
+					board[line+i][row].state = State.White;
+					i--;
+				}
+			}
+			if(board[line][row].up_left != null){
+				int i = -1;
+				int j = -1; 
+				ch = board[line][row].up.toCharArray();
+				int x = ch[1] - '1';
+				int y = ch[0] - 'a';
+				while(i!=x || j!=y){
+					board[line+i][row+j].state = State.White;
+					i--;
+					j--;
+				}
+			}
+			if(board[line][row].up_right != null){
+				int i = -1;
+				int j = 1; 
+				ch = board[line][row].up.toCharArray();
+				int x = ch[1] - '1';
+				int y = ch[0] - 'a';
+				while(i!=x || j!=y){
+					board[line+i][row+j].state = State.White;
+					i--;
+					j++;
+				}
+			}
+			if(board[line][row].left != null){
+				int j = -1; 
+				ch = board[line][row].up.toCharArray();
+				int x = ch[1] - '1';
+				int y = ch[0] - 'a';
+				while(j!=y){
+					board[line][row+j].state = State.White;
+					j--;
+				}
+			}
+			if(board[line][row].right != null){
+				int j = 1; 
+				ch = board[line][row].up.toCharArray();
+				int x = ch[1] - '1';
+				int y = ch[0] - 'a';
+				while(j!=y){
+					board[line][row+j].state = State.White;
+					j++;
+				}
+			}
+			if(board[line][row].down != null){
+				int i = 1; 
+				ch = board[line][row].up.toCharArray();
+				int x = ch[1] - '1';
+				int y = ch[0] - 'a';
+				while(i!=x){
+					board[line+i][row].state = State.White;
+					i++;
+				}
+			}
+			if(board[line][row].down_left != null){
+				int i = 1;
+				int j = -1; 
+				ch = board[line][row].up.toCharArray();
+				int x = ch[1] - '1';
+				int y = ch[0] - 'a';
+				while(i!=x || j!=y){
+					board[line+i][row+j].state = State.White;
+					i++;
+					j--;
+				}
+			}
+			if(board[line][row].down_right != null){
+				int i = 1;
+				int j = 1; 
+				ch = board[line][row].up.toCharArray();
+				int x = ch[1] - '1';
+				int y = ch[0] - 'a';
+				while(i!=x || j!=y){
+					board[line+i][row+j].state = State.White;
+					i++;
+					j++;
+				}
+			}
 
-							if((line+x) >= 0 && (line+x) < 8 && (row+y) >= 0 && (row+y) < 8){ //配列の範囲内
-								if(board[line+x][row+y].state == State.White) 
-									continue;
-								if(board[line+x][row+y].state == State.Black){
-//									System.out.println(x + " " + y);
-									check = true;
-									break;
+		}
+
+		//boardを更新する。
+		renew(board);
+	}
+	
+	private static void renew(Board[][] board){
+		for(int i = 0; i < 8; i++){
+			for(int j = 0; j < 8; j++){
+				renew(board, i, j);	
+			}
+		}
+	}
+
+	private static void renew(Board[][] board, int line, int row){
+		for(int i = -1; i < 1; i++){
+			for(int j = -1; j < 1; j++){
+				//自分のマスのときは飛ばす。
+				if(i == 0 && j == 0) continue;
+
+				if(board[line+i][row+j].state == State.Empty){
+					break;
+				}else if(board[line+i][row+j].state == State.White){
+					boolean check = false;
+					int x = i;
+					int y = j;
+					while(true){
+						if(i == -1)		x--;
+						if(i == 1)		x++;
+						if(j == -1)		y--;
+						if(j == 1)		y++;
+
+						if((line+x) >= 0 && (line+x) < 8 && (row+y) >= 0 && (row+y) < 8){ //配列の範囲内
+							if(board[line+x][row+y].state == State.White) 
+								continue;
+							if(board[line+x][row+y].state == State.Black){
+								check = true;
+								char[] c1 = Character.toChars((row+y) +'a');
+								char[] c2 = Character.toChars((line+x)+'1');
+								String str1 = new String(c1);
+								String str2 = new String(c2);
+								StringBuffer bf = new StringBuffer();
+								bf.append(str1);
+								bf.append(str2);
+								if(i == -1){
+									if(j == -1) board[line][row].up_left = bf.toString();
+									if(j == 0)  board[line][row].up = bf.toString();
+									if(j == 1)  board[line][row].up_right = bf.toString();
+								}else if(i == 0){
+									if(j == -1) board[line][row].left = bf.toString();
+									if(j == 1)  board[line][row].right = bf.toString();;
+								}else if(i == 1){
+									if(j == -1) board[line][row].down_left = bf.toString();
+									if(j == 0)  board[line][row].down = bf.toString();
+									if(j == 1)  board[line][row].down_right = bf.toString();
 								}
 								break;
-							}else{
+							}
+							break;
+						}else{
+							break;
+						}
+					}
+					if(check){
+						board[line][row].blackNextMove = true;
+						board[line][row].whiteNextMove = false;
+					}
+				}else if(board[line+i][row+j].state == State.Black){
+					boolean check = false;
+					int x = i;
+					int y = j;
+					while(true){
+						if(i == -1)		x--;
+						if(i == 1)		x++;
+						if(j == -1)		y--;
+						if(j == 1)		y++;
+
+						if((line+x) >= 0 && (line+x) < 8 && (row+y) >= 0 && (row+y) < 8){ //配列の範囲内
+							if(board[line+x][row+y].state == State.Black) 
+								continue;
+							if(board[line+x][row+y].state == State.White){
+								check = true;
+								char[] c1 = Character.toChars((row+y)+'a');
+								char[] c2 = Character.toChars((line+x)+'1');
+								String str1 = new String(c1);
+								String str2 = new String(c2);
+								StringBuffer bf = new StringBuffer();
+								bf.append(str1);
+								bf.append(str2);
+								if(i == -1){
+									if(j == -1) board[line][row].up_left = bf.toString();
+									if(j == 0)  board[line][row].up = bf.toString();
+									if(j == 1)  board[line][row].up_right = bf.toString();
+								}else if(i == 0){
+									if(j == -1) board[line][row].left = bf.toString();
+									if(j == 1)  board[line][row].right = bf.toString();
+								}else if(i == 1){
+									if(j == -1) board[line][row].down_left = bf.toString();
+									if(j == 0)  board[line][row].down = bf.toString();
+									if(j == 1)  board[line][row].down_right = bf.toString();
+								}
 								break;
 							}
+							break;
+						}else{
+							break;
 						}
-
-						//ひっくり返せるとき
-						if(check){
-							int i1 = i;
-							int j1 = j;
-							while(i1 != x || j1 != y){
-//								System.out.println(i1 + " " + j1);
-								board[line+i1][row+j1].state = State.Black;
-								if(i == -1)	i1--;
-								if(i == 1)	i1++;
-								if(j == -1)	j1--;
-								if(j == 1)	j1++;
-							}
-						}
-//						System.out.println(x + " " + y);
+					}
+					if(check){
+						board[line][row].blackNextMove = false;
+						board[line][row].whiteNextMove = true;
 					}
 				}
 			}

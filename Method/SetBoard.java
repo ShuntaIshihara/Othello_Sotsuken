@@ -344,7 +344,7 @@ public class SetBoard extends MyEnum{
 						board[line][row].blackNextMove = true;
 						board[line][row].whiteNextMove = false;
 					}
-				}else if(board[line+i][row+j].state == State.Black){
+/*				}else if(board[line+i][row+j].state == State.Black){
 					boolean check = false;
 					int x = i;
 					int y = j;

@@ -21,14 +21,14 @@ public class Board extends MyEnum{
 		this.whiteNextMove = whiteNextMove;
 		this.blackNextMove = blackNextMove;
 		this.importance = importance;
-		up[0] = null; up[1] = null;
-		up_left = null;
-		up_right = null;
-		left = null;
-		right = null;
-		down = null;
-		down_left = null;
-		down_right = null;
+		up[0] = 8; up[1] = 8;
+		up_left[0] = 8; up_left[1] = 8;
+		up_right[0] = 8; up_right[1] = 8;
+		left[0] = 8; left[1] = 8;
+		right[0] = 8; right[1] = 8;
+		down[0] = 8; down[1] = 8;
+		down_left[0] = 8; down_left[1] = 8;
+		down_right[0] = 8; down_right[1] = 8;
 	}
 
 	Board(String coordinate, State state, boolean whiteNextMove, boolean blackNextMove, double importance, String up, String down, String left, String right){
@@ -37,13 +37,37 @@ public class Board extends MyEnum{
 		this.whiteNextMove = whiteNextMove;
 		this.blackNextMove = blackNextMove;
 		this.importance = importance;
-		this.up = up; 
-		up_left = null;
-		up_right = null;
-		this.left = left;
-		this.right = right;
-		this.down = down;
-		down_left = null;
-		down_right = null;
+		if(up != null){
+			char[] ch = up.toCharArray();
+			this.up[0] = ch[1] - '1';
+			this.up[1] = ch[0] - 'a';
+		}else{
+			this.up[0] = 8; this.up[1] = 8;
+		} 
+		up_left[0] = 8; up_left[1] = 8;
+		up_right[0] = 8; up_right[1] = 8;
+		if(left != null){
+			char[] ch = left.toCharArray();
+			this.left[0] = ch[1] - '1';
+			this.left[1] = ch[0] - 'a';
+		}else{
+			this.left[0] = 8; this.left[1] = 8;
+		}
+		if(right != null){
+			char[] ch = right.toCharArray();
+			this.right[0] = ch[1] - '1';
+			this.right[1] = ch[0] - 'a';
+		}else{
+			this.right[0] = 8; this.right[1] = 8;
+		}
+		if(down != null){
+			char[] ch = down.toCharArray();
+			this.down[0] = ch[1] - '1';
+			this.down[1] = ch[0] - 'a';
+		}else{
+			this.down[0] = 8; this.down[1] = 8;
+		}
+		down_left[0] = 8; down_left[1] = 8;
+		down_right[0] = 8; down_right[1] = 8;
 	}
 }

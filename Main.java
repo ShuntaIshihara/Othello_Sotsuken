@@ -98,5 +98,7 @@ class Main extends MyEnum{
 					System.out.println("white can move to " + board[i][j].coordinate);
 			}
 
+		System.out.println(board[5][3].whiteNextMove);
+		System.out.println(board[5][3].up[0] + ", " + board[5][3].up[1]);
 	}
 }

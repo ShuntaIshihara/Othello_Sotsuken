@@ -29,7 +29,7 @@ public class SetBoard extends MyEnum{
 					case "h8" : board[i][j] = new Board(coordinate, State.Empty, false, false, 10.0);
 								break;
 
-					//X,Cの重要度
+								//X,Cの重要度
 					case "b1" : board[i][j] = new Board(coordinate, State.Empty, false, false, -10.0); 
 								break;
 					case "b2" : board[i][j] = new Board(coordinate, State.Empty, false, false, -10.0); 
@@ -55,19 +55,19 @@ public class SetBoard extends MyEnum{
 					case "h7" : board[i][j] = new Board(coordinate, State.Empty, false, false, -10.0); 
 								break;
 
-					//黒の初期位置
+								//黒の初期位置
 					case "e4" :	board[i][j] = new Board(coordinate, State.Black, false, false, 0);
 								break;
 					case "d5" : board[i][j] = new Board(coordinate, State.Black, false, false, 0);
 								break;
 
-					//白の初期位置
+								//白の初期位置
 					case "d4" : board[i][j] = new Board(coordinate, State.White, false, false, 0);
 								break;
 					case "e5" : board[i][j] = new Board(coordinate, State.White, false, false, 0);
 								break;
 
-					//黒が打てるところ
+								//黒が打てるところ
 					case "d3" : board[i][j] = new Board(coordinate, State.Empty, false, true, 0, null, "d5", null, null);
 								break;
 					case "c4" : board[i][j] = new Board(coordinate, State.Empty, false, true, 0, null, null, null, "e4");
@@ -77,7 +77,7 @@ public class SetBoard extends MyEnum{
 					case "e6" : board[i][j] = new Board(coordinate, State.Empty, false, true, 0, "e4", null, null, null);
 								break;
 
-					//その他
+								//その他
 					default : board[i][j] = new Board(coordinate, State.Empty, false, false, 0);
 				}
 			}
@@ -93,301 +93,380 @@ public class SetBoard extends MyEnum{
 		if(white){ //白のとき
 			//指定された座標に石を置く
 			board[line][row].state = State.White;
+			board[line][row].blackNextMove = false;
+			board[line][row].whiteNextMove = false;
+			
 
 			//ひっくり返す。
-			if(board[line][row].up != null){
+			if(board[line][row].up[0]*board[line][row].up[1] != 64){
 				int i = -1;
-				ch = board[line][row].up.toCharArray();
-				int x = ch[1] - '1';
-				int y = ch[0] - 'a';
-				while(i!=x){
+				while(line+i!=board[line][row].up[0]){
 					board[line+i][row].state = State.White;
+					board[line+i][row].up[0] = 8;
+					board[line+i][row].up[1] = 8;
 					i--;
 				}
 			}
-			if(board[line][row].up_left != null){
+			if(board[line][row].up_left[0]*board[line][row].up_left[1] != 64){
 				int i = -1;
 				int j = -1; 
-				ch = board[line][row].up.toCharArray();
-				int x = ch[1] - '1';
-				int y = ch[0] - 'a';
-				while(i!=x || j!=y){
+				while(line+i!=board[line][row].up_left[0] || row+j!=board[line][row].up_left[1]){
 					board[line+i][row+j].state = State.White;
+					board[line+i][row+j].up_left[0] = 8;
+					board[line+i][row+j].up_left[1] = 8;
 					i--;
 					j--;
 				}
 			}
-			if(board[line][row].up_right != null){
+			if(board[line][row].up_right[0]*board[line][row].up_right[1] != 64){
 				int i = -1;
 				int j = 1; 
-				ch = board[line][row].up.toCharArray();
-				int x = ch[1] - '1';
-				int y = ch[0] - 'a';
-				while(i!=x || j!=y){
+				while(line+i!=board[line][row].up_right[0] || row+j!=board[line][row].up_right[1]){
 					board[line+i][row+j].state = State.White;
+					board[line+i][row+j].up_right[0] = 8;
+					board[line+i][row+j].up_right[1] = 8;
 					i--;
 					j++;
 				}
 			}
-			if(board[line][row].left != null){
+			if(board[line][row].left[0]*board[line][row].left[1] != 64){
 				int j = -1; 
-				ch = board[line][row].up.toCharArray();
-				int x = ch[1] - '1';
-				int y = ch[0] - 'a';
-				while(j!=y){
+				while(row+j!=board[line][row].left[1]){
 					board[line][row+j].state = State.White;
+					board[line][row+j].left[0] = 8;
+					board[line][row+j].left[1] = 8;
 					j--;
 				}
 			}
-			if(board[line][row].right != null){
+			if(board[line][row].right[0]*board[line][row].right[1] != 64){
 				int j = 1; 
-				ch = board[line][row].up.toCharArray();
-				int x = ch[1] - '1';
-				int y = ch[0] - 'a';
-				while(j!=y){
+				while(row+j!=board[line][row].right[1]){
 					board[line][row+j].state = State.White;
+					board[line][row+j].right[0] = 8;
+					board[line][row+j].right[1] = 8;
 					j++;
 				}
 			}
-			if(board[line][row].down != null){
+			if(board[line][row].down[0]*board[line][row].down[1] != 64){
 				int i = 1; 
-				ch = board[line][row].up.toCharArray();
-				int x = ch[1] - '1';
-				int y = ch[0] - 'a';
-				while(i!=x){
+				while(line+i!=board[line][row].down[0]){
 					board[line+i][row].state = State.White;
+					board[line+i][row].down[0] = 8;
+					board[line+i][row].down[1] = 8;
 					i++;
 				}
 			}
-			if(board[line][row].down_left != null){
+			if(board[line][row].down_left[0]*board[line][row].down_left[1] != 64){
 				int i = 1;
 				int j = -1; 
-				ch = board[line][row].up.toCharArray();
-				int x = ch[1] - '1';
-				int y = ch[0] - 'a';
-				while(i!=x || j!=y){
+				while(line+i!=board[line][row].down_left[0] || row+j!=board[line][row].down_left[1]){
 					board[line+i][row+j].state = State.White;
+					board[line+i][row+j].down_left[0] = 8;
+					board[line+i][row+j].down_left[1] = 8;
 					i++;
 					j--;
 				}
 			}
-			if(board[line][row].down_right != null){
+			if(board[line][row].down_right[0]*board[line][row].down_right[1] != 64){
 				int i = 1;
 				int j = 1; 
-				ch = board[line][row].up.toCharArray();
-				int x = ch[1] - '1';
-				int y = ch[0] - 'a';
-				while(i!=x || j!=y){
+				while(line+i!=board[line][row].down_right[0] || row+j!=board[line][row].down_right[1]){
 					board[line+i][row+j].state = State.White;
+					board[line+i][row+j].down_right[0] = 8;
+					board[line+i][row+j].down_right[1] = 8;
 					i++;
 					j++;
 				}
 			}
+			board[line][row].up[0] = 8;			
+			board[line][row].up[1] = 8;
+			board[line][row].up_left[0] = 8;
+			board[line][row].up_left[1] = 8;
+			board[line][row].up_right[0] = 8;
+			board[line][row].up_right[1] = 8;
+			board[line][row].left[0] = 8;
+			board[line][row].left[1] = 8;
+			board[line][row].right[0] = 8;
+			board[line][row].right[1] = 8;
+			board[line][row].down[0] = 8;
+			board[line][row].down[1] = 8;
+			board[line][row].down_left[0] = 8;
+			board[line][row].down_left[1] = 8;
+			board[line][row].down_right[0] = 8;
+			board[line][row].down_right[1] = 8;
+
 		}else{ //黒のとき
 			//指定された座標に石を置く
-			board[line][row].state = State.White;
-
+			board[line][row].state = State.Black;
+			board[line][row].blackNextMove = false;
+			board[line][row].whiteNextMove = false;
+			
 			//ひっくり返す。
-			if(board[line][row].up != null){
+			if(board[line][row].up[0]*board[line][row].up[1] != 64){
 				int i = -1;
-				ch = board[line][row].up.toCharArray();
-				int x = ch[1] - '1';
-				int y = ch[0] - 'a';
-				while(i!=x){
-					board[line+i][row].state = State.White;
+				while(line+i!=board[line][row].up[0]){
+					board[line+i][row].state = State.Black;
+					board[line+i][row].up[0] = 8;
+					board[line+i][row].up[1] = 8;
 					i--;
 				}
 			}
-			if(board[line][row].up_left != null){
+			if(board[line][row].up_left[0]*board[line][row].up_left[1] != 64){
 				int i = -1;
 				int j = -1; 
-				ch = board[line][row].up.toCharArray();
-				int x = ch[1] - '1';
-				int y = ch[0] - 'a';
-				while(i!=x || j!=y){
-					board[line+i][row+j].state = State.White;
+				while(line+i!=board[line][row].up_left[0] || row+j!=board[line][row].up_left[1]){
+					board[line+i][row+j].state = State.Black;
+					board[line+i][row+j].up_left[0] = 8;
+					board[line+i][row+j].up_left[1] = 8;
 					i--;
 					j--;
 				}
 			}
-			if(board[line][row].up_right != null){
+			if(board[line][row].up_right[0]*board[line][row].up_right[1] != 64){
 				int i = -1;
 				int j = 1; 
-				ch = board[line][row].up.toCharArray();
-				int x = ch[1] - '1';
-				int y = ch[0] - 'a';
-				while(i!=x || j!=y){
-					board[line+i][row+j].state = State.White;
+				while(line+i!=board[line][row].up_right[0] || row+j!=board[line][row].up_right[1]){
+					board[line+i][row+j].state = State.Black;
+					board[line+i][row+j].up_right[0] = 8;
+					board[line+i][row+j].up_right[1] = 8;
 					i--;
 					j++;
 				}
 			}
-			if(board[line][row].left != null){
+			if(board[line][row].left[0]*board[line][row].left[1] != 64){
 				int j = -1; 
-				ch = board[line][row].up.toCharArray();
-				int x = ch[1] - '1';
-				int y = ch[0] - 'a';
-				while(j!=y){
-					board[line][row+j].state = State.White;
+				while(row+j!=board[line][row].left[1]){
+					board[line][row+j].state = State.Black;
+					board[line][row+j].left[0] = 8;
+					board[line][row+j].left[1] = 8;
 					j--;
 				}
 			}
-			if(board[line][row].right != null){
+			if(board[line][row].right[0]*board[line][row].right[1] != 64){
 				int j = 1; 
-				ch = board[line][row].up.toCharArray();
-				int x = ch[1] - '1';
-				int y = ch[0] - 'a';
-				while(j!=y){
-					board[line][row+j].state = State.White;
+				while(row+j!=board[line][row].right[1]){
+					board[line][row+j].state = State.Black;
+					board[line][row+j].right[0] = 8;
+					board[line][row+j].right[1] = 8;
 					j++;
 				}
 			}
-			if(board[line][row].down != null){
+			if(board[line][row].down[0]*board[line][row].down[1] != 64){
 				int i = 1; 
-				ch = board[line][row].up.toCharArray();
-				int x = ch[1] - '1';
-				int y = ch[0] - 'a';
-				while(i!=x){
-					board[line+i][row].state = State.White;
+				while(line+i!=board[line][row].down[0]){
+					board[line+i][row].state = State.Black;
+					board[line+i][row].down[0] = 8;
+					board[line+i][row].down[1] = 8;
 					i++;
 				}
 			}
-			if(board[line][row].down_left != null){
+			if(board[line][row].down_left[0]*board[line][row].down_left[1] != 64){
 				int i = 1;
 				int j = -1; 
-				ch = board[line][row].up.toCharArray();
-				int x = ch[1] - '1';
-				int y = ch[0] - 'a';
-				while(i!=x || j!=y){
-					board[line+i][row+j].state = State.White;
+				while(line+i!=board[line][row].down_left[0] || row+j!=board[line][row].down_left[1]){
+					board[line+i][row+j].state = State.Black;
+					board[line+i][row+j].down_left[0] = 8;
+					board[line+i][row+j].down_left[1] = 8;
 					i++;
 					j--;
 				}
 			}
-			if(board[line][row].down_right != null){
+			if(board[line][row].down_right[0]*board[line][row].down_right[1] != 64){
 				int i = 1;
 				int j = 1; 
-				ch = board[line][row].up.toCharArray();
-				int x = ch[1] - '1';
-				int y = ch[0] - 'a';
-				while(i!=x || j!=y){
-					board[line+i][row+j].state = State.White;
+				while(line+i!=board[line][row].down_right[0] || row+j!=board[line][row].down_right[1]){
+					board[line+i][row+j].state = State.Black;
+					board[line+i][row+j].down_right[0] = 8;
+					board[line+i][row+j].down_right[1] = 8;
 					i++;
 					j++;
 				}
 			}
-
+			board[line][row].up[0] = 8;			
+			board[line][row].up[1] = 8;
+			board[line][row].up_left[0] = 8;
+			board[line][row].up_left[1] = 8;
+			board[line][row].up_right[0] = 8;
+			board[line][row].up_right[1] = 8;
+			board[line][row].left[0] = 8;
+			board[line][row].left[1] = 8;
+			board[line][row].right[0] = 8;
+			board[line][row].right[1] = 8;
+			board[line][row].down[0] = 8;
+			board[line][row].down[1] = 8;
+			board[line][row].down_left[0] = 8;
+			board[line][row].down_left[1] = 8;
+			board[line][row].down_right[0] = 8;
+			board[line][row].down_right[1] = 8;
 		}
-
 		//boardを更新する。
 		renew(board);
 	}
-	
+
 	private static void renew(Board[][] board){
 		for(int i = 0; i < 8; i++){
 			for(int j = 0; j < 8; j++){
-				renew(board, i, j);	
+				if(board[i][j].state == State.Empty){
+					renew(board, i, j);	
+					if(i == 5 && j == 3){
+						System.out.println(board[i][j].whiteNextMove);
+						System.out.println(board[i][j].up[0] + ", " + board[i][j].up[1]);
+					}
+				}
 			}
 		}
 	}
 
 	private static void renew(Board[][] board, int line, int row){
+		board[line][row].blackNextMove = false;
+		board[line][row].whiteNextMove = false;
+		board[line][row].up[0] = 8;			
+		board[line][row].up[1] = 8;
+		board[line][row].up_left[0] = 8;
+		board[line][row].up_left[1] = 8;
+		board[line][row].up_right[0] = 8;
+		board[line][row].up_right[1] = 8;
+		board[line][row].left[0] = 8;
+		board[line][row].left[1] = 8;
+		board[line][row].right[0] = 8;
+		board[line][row].right[1] = 8;
+		board[line][row].down[0] = 8;
+		board[line][row].down[1] = 8;
+		board[line][row].down_left[0] = 8;
+		board[line][row].down_left[1] = 8;
+		board[line][row].down_right[0] = 8;
+		board[line][row].down_right[1] = 8;
+
 		for(int i = -1; i < 1; i++){
 			for(int j = -1; j < 1; j++){
 				//自分のマスのときは飛ばす。
 				if(i == 0 && j == 0) continue;
 
-				if(board[line+i][row+j].state == State.Empty){
-					break;
-				}else if(board[line+i][row+j].state == State.White){
-					boolean check = false;
-					int x = i;
-					int y = j;
-					while(true){
-						if(i == -1)		x--;
-						if(i == 1)		x++;
-						if(j == -1)		y--;
-						if(j == 1)		y++;
+				if(line+i >= 0 && line+i < 8 && row+j >= 0 && row+j < 8){	
+					if(board[line+i][row+j].state == State.Empty){
+						break;
+					}else if(board[line+i][row+j].state == State.White){
+						boolean check = false;
+						int x = i;
+						int y = j;
+						while(true){
+							if(i == -1)		x--;
+							if(i == 1)		x++;
+							if(j == -1)		y--;
+							if(j == 1)		y++;
 
-						if((line+x) >= 0 && (line+x) < 8 && (row+y) >= 0 && (row+y) < 8){ //配列の範囲内
-							if(board[line+x][row+y].state == State.White) 
-								continue;
-							if(board[line+x][row+y].state == State.Black){
-								check = true;
-								char[] c1 = Character.toChars((row+y) +'a');
-								char[] c2 = Character.toChars((line+x)+'1');
-								String str1 = new String(c1);
-								String str2 = new String(c2);
-								StringBuffer bf = new StringBuffer();
-								bf.append(str1);
-								bf.append(str2);
-								if(i == -1){
-									if(j == -1) board[line][row].up_left = bf.toString();
-									if(j == 0)  board[line][row].up = bf.toString();
-									if(j == 1)  board[line][row].up_right = bf.toString();
-								}else if(i == 0){
-									if(j == -1) board[line][row].left = bf.toString();
-									if(j == 1)  board[line][row].right = bf.toString();;
-								}else if(i == 1){
-									if(j == -1) board[line][row].down_left = bf.toString();
-									if(j == 0)  board[line][row].down = bf.toString();
-									if(j == 1)  board[line][row].down_right = bf.toString();
+							if((line+x) >= 0 && (line+x) < 8 && (row+y) >= 0 && (row+y) < 8){ //配列の範囲内
+								if(board[line+x][row+y].state == State.White) 
+									continue;
+								if(board[line+x][row+y].state == State.Black){
+									check = true;
+									if(i == -1){
+										if(j == -1){
+											board[line][row].up_left[0] = x;
+											board[line][row].up_left[1] = y;
+										}
+										if(j == 0){
+											board[line][row].up[0] = x;
+											board[line][row].up[1] = y;
+										}
+										if(j == 1){
+											board[line][row].up_right[0] = x;
+											board[line][row].up_right[1] = y;
+										}
+									}else if(i == 0){
+										if(j == -1){
+											board[line][row].left[0] = x;
+											board[line][row].left[1] = y;
+										}
+										if(j == 1){
+											board[line][row].right[0] = x;
+											board[line][row].right[1] = y;
+										}
+									}else if(i == 1){
+										if(j == -1){
+											board[line][row].down_left[0] = x;
+											board[line][row].down_left[1] = y;
+										}
+										if(j == 0){
+											board[line][row].down[0] = x;
+											board[line][row].down[1] = y;
+										}
+										if(j == 1){
+											board[line][row].down_right[0] = x;
+											board[line][row].down_right[1] = y;
+										}
+									}
 								}
 								break;
-							}
-							break;
-						}else{
-							break;
-						}
-					}
-					if(check){
-						board[line][row].blackNextMove = true;
-						board[line][row].whiteNextMove = false;
-					}
-/*				}else if(board[line+i][row+j].state == State.Black){
-					boolean check = false;
-					int x = i;
-					int y = j;
-					while(true){
-						if(i == -1)		x--;
-						if(i == 1)		x++;
-						if(j == -1)		y--;
-						if(j == 1)		y++;
-
-						if((line+x) >= 0 && (line+x) < 8 && (row+y) >= 0 && (row+y) < 8){ //配列の範囲内
-							if(board[line+x][row+y].state == State.Black) 
-								continue;
-							if(board[line+x][row+y].state == State.White){
-								check = true;
-								char[] c1 = Character.toChars((row+y)+'a');
-								char[] c2 = Character.toChars((line+x)+'1');
-								String str1 = new String(c1);
-								String str2 = new String(c2);
-								StringBuffer bf = new StringBuffer();
-								bf.append(str1);
-								bf.append(str2);
-								if(i == -1){
-									if(j == -1) board[line][row].up_left = bf.toString();
-									if(j == 0)  board[line][row].up = bf.toString();
-									if(j == 1)  board[line][row].up_right = bf.toString();
-								}else if(i == 0){
-									if(j == -1) board[line][row].left = bf.toString();
-									if(j == 1)  board[line][row].right = bf.toString();
-								}else if(i == 1){
-									if(j == -1) board[line][row].down_left = bf.toString();
-									if(j == 0)  board[line][row].down = bf.toString();
-									if(j == 1)  board[line][row].down_right = bf.toString();
-								}
+							}else{
 								break;
 							}
-							break;
-						}else{
-							break;
 						}
-					}
-					if(check){
-						board[line][row].blackNextMove = false;
-						board[line][row].whiteNextMove = true;
+						if(check){
+							board[line][row].blackNextMove = true;
+							board[line][row].whiteNextMove = false;
+						}
+					}else if(board[line+i][row+j].state == State.Black){
+						boolean check = false;
+						int x = i;
+						int y = j;
+						while(true){
+							if(i == -1)		x--;
+							if(i == 1)		x++;
+							if(j == -1)		y--;
+							if(j == 1)		y++;
+
+							if((line+x) >= 0 && (line+x) < 8 && (row+y) >= 0 && (row+y) < 8){ //配列の範囲内
+								if(board[line+x][row+y].state == State.Black) 
+									continue;
+								if(board[line+x][row+y].state == State.White){
+									check = true;
+									if(i == -1){
+										if(j == -1){
+											board[line][row].up_left[0] = x;
+											board[line][row].up_left[1] = y;
+										}
+										if(j == 0){
+											board[line][row].up[0] = x;
+											board[line][row].up[1] = y;
+										}
+										if(j == 1){
+											board[line][row].up_right[0] = x;
+											board[line][row].up_right[1] = y;
+										}
+									}else if(i == 0){
+										if(j == -1){
+											board[line][row].left[0] = x;
+											board[line][row].left[1] = y;
+										}
+										if(j == 1){
+											board[line][row].right[0] = x;
+											board[line][row].right[1] = y;
+										}
+									}else if(i == 1){
+										if(j == -1){
+											board[line][row].down_left[0] = x;
+											board[line][row].down_left[1] = y;
+										}
+										if(j == 0){
+											board[line][row].down[0] = x;
+											board[line][row].down[1] = y;
+										}
+										if(j == 1){
+											board[line][row].down_right[0] = x;
+											board[line][row].down_right[1] = y;
+										}
+									}
+								}
+								break;
+							}else{
+								break;
+							}
+						}
+						if(check){
+							board[line][row].blackNextMove = false;
+							board[line][row].whiteNextMove = true;
+						}
 					}
 				}
 			}

@@ -15,6 +15,7 @@ class Main extends MyEnum{
 //		System.out.println(white);
 
 		String opponent = "";
+		String my = "";
 
 		//while(true){
 
@@ -29,8 +30,8 @@ class Main extends MyEnum{
 				SetBoard.setboard(board, opponent, !white);
 				
 				//---------------------------------------------
-				//AlphaBetaメソッドを呼び出して最適解を見つける。
-
+				//探索をする
+				my = AlphaBeta.startsearch(board, white); 
 				//---------------------------------------------
 
 				//---------------------------------------------
@@ -44,11 +45,6 @@ class Main extends MyEnum{
 				//---------------------------------------------
 //			}else{//先手のとき
 								
-				//---------------------------------------------
-				//AlphaBetaメソッドを呼び出して最適解を見つける。
-
-				//---------------------------------------------
-
 				//---------------------------------------------
 				//自分の手を出力する
 
@@ -72,7 +68,7 @@ class Main extends MyEnum{
 		
 		//テスト用コード（入力とboardの初期化）
 		
-		System.out.println("boardの状態 座標を返す");
+		/*System.out.println("boardの状態 座標を返す");
 		for(int i = 0; i < 8; i++){
 			for(int j = 0; j < 8; j++)
 				System.out.print(" " + board[i][j].coordinate);
@@ -99,6 +95,6 @@ class Main extends MyEnum{
 			}
 
 		System.out.println(board[5][3].whiteNextMove);
-		System.out.println(board[5][3].up[0] + ", " + board[5][3].up[1]);
+		System.out.println(board[5][3].up[0] + ", " + board[5][3].up[1]);*/
 	}
 }

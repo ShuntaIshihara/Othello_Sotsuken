@@ -70,4 +70,28 @@ public class Board extends MyEnum{
 		down_left[0] = 8; down_left[1] = 8;
 		down_right[0] = 8; down_right[1] = 8;
 	}
+
+	Board(String coordinate, State state, boolean whiteNextMove, boolean BlackNextMove, double importance, int up0, int up1, int up_left0, int up_left1, int up_right0, int up_right1, int left0, int left1, int right0, int right1, int down0, int down1, int down_left, int down_right){
+		this.coordinate = coordinate;
+		this.state = state;
+		this.whiteNextMove = whiteNextMove;
+		this.BlackNextMove = blackNextMove;
+		this.importance = importance;
+		up[0] = up0;
+		up[1] = up1;
+		up_left[0] = up_left0;
+		up_left[1] = up_left1;
+		up_right[0] = up_right0;
+		up_right[1] = up_right1;
+		left[0] = left0;
+		left[1] = left1;
+		right[0] = right0;
+		right[1] = right1;
+		down[0] = down0;
+		down[1] = down1;
+		down_left[0] = down_left0;
+		down_left[1] = down_left1;
+		down_right[0] = down_right0;
+		down_right[1] = down_right1;
+	}
 }

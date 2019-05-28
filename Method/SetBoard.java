@@ -308,10 +308,6 @@ public class SetBoard extends MyEnum{
 			for(int j = 0; j < 8; j++){
 				if(board[i][j].state == State.Empty){
 					renew(board, i, j);	
-					if(i == 5 && j == 3){
-						System.out.println(board[i][j].whiteNextMove);
-						System.out.println(board[i][j].up[0] + ", " + board[i][j].up[1]);
-					}
 				}
 			}
 		}
@@ -337,14 +333,14 @@ public class SetBoard extends MyEnum{
 		board[line][row].down_right[0] = 8;
 		board[line][row].down_right[1] = 8;
 
-		for(int i = -1; i < 1; i++){
-			for(int j = -1; j < 1; j++){
+		for(int i = -1; i <= 1; i++){
+			for(int j = -1; j <= 1; j++){
 				//自分のマスのときは飛ばす。
 				if(i == 0 && j == 0) continue;
 
 				if(line+i >= 0 && line+i < 8 && row+j >= 0 && row+j < 8){	
 					if(board[line+i][row+j].state == State.Empty){
-						break;
+						continue;
 					}else if(board[line+i][row+j].state == State.White){
 						boolean check = false;
 						int x = i;
@@ -417,6 +413,7 @@ public class SetBoard extends MyEnum{
 							if(j == 1)		y++;
 
 							if((line+x) >= 0 && (line+x) < 8 && (row+y) >= 0 && (row+y) < 8){ //配列の範囲内
+								
 								if(board[line+x][row+y].state == State.Black) 
 									continue;
 								if(board[line+x][row+y].state == State.White){

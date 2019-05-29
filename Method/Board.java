@@ -14,6 +14,7 @@ public class Board extends MyEnum{
 	public int[] down = new int[2];				//下のマスのどこまでひっくり返せるか
 	public int[] down_left = new int[2];	//左下のマスのどこまでひっくり返せるか
 	public int[] down_right = new int[2];	//右下のマスのどこまでひっくり返せるか
+	public boolean move = false;
 
 	Board(String coordinate, State state, boolean whiteNextMove, boolean blackNextMove, double importance){
 		this.coordinate = coordinate;
@@ -71,11 +72,11 @@ public class Board extends MyEnum{
 		down_right[0] = 8; down_right[1] = 8;
 	}
 
-	Board(String coordinate, State state, boolean whiteNextMove, boolean BlackNextMove, double importance, int up0, int up1, int up_left0, int up_left1, int up_right0, int up_right1, int left0, int left1, int right0, int right1, int down0, int down1, int down_left, int down_right){
+	Board(String coordinate, State state, boolean whiteNextMove, boolean BlackNextMove, double importance, int up0, int up1, int up_left0, int up_left1, int up_right0, int up_right1, int left0, int left1, int right0, int right1, int down0, int down1, int down_left0, int down_left1, int down_right0, int down_right1){
 		this.coordinate = coordinate;
 		this.state = state;
 		this.whiteNextMove = whiteNextMove;
-		this.BlackNextMove = blackNextMove;
+		this.blackNextMove = blackNextMove;
 		this.importance = importance;
 		up[0] = up0;
 		up[1] = up1;

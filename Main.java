@@ -17,84 +17,42 @@ class Main extends MyEnum{
 		String opponent = "";
 		String my = "";
 
-		//while(true){
-
+		while(true){
 			//後手のとき
-//			if(white){
+			if(white){
 				//相手の一手を入力する。
 				opponent = InputOpponentMove.inputopponentmove(board, !white);
-				//InputOpponentMoveテスト用コード
-//				System.out.println(opponent);
 
 				//入力された相手の手の座標からboardを更新する。
 				SetBoard.setboard(board, opponent, !white);
 				
-				//---------------------------------------------
 				//探索をする
 				my = AlphaBeta.startsearch(board, white); 
-				//---------------------------------------------
 
-				//---------------------------------------------
 				//自分の手を出力する
+				System.out.println("I put stone at " + my);
 
-				//---------------------------------------------
-
-				//---------------------------------------------
 				//boardを更新する。
-//				SetBoard.setboard(board, my, white);
-				//---------------------------------------------
-//			}else{//先手のとき
-								
-				//---------------------------------------------
+ 				SetBoard.setboard(board, my, white);
+			}else{//先手のとき
+				//探索をする
+				my = AlphaBeta.startsearch(board, white);
+
 				//自分の手を出力する
+				System.out.println("I put stone at " + my);
 
-				//---------------------------------------------
-
-				//---------------------------------------------
 				//boardを更新する。
-
-				//---------------------------------------------
+				SetBoard.setboard(board, my, white);
 
 				//相手の一手を入力する。
-//				opponent = InputOpponentMove.inputopponentmove();
+				opponent = InputOpponentMove.inputopponentmove(board, !white);
+
 				//入力された相手の手の座標からboardを更新する。
-//				Setboard.setboard(board, opponent);
-//			}
-			//--------------------------------------------
+				SetBoard.setboard(board, opponent, !white);
+			}
 			//もし局面がゲームの終わりになったとき break;
-
-			//--------------------------------------------
-		//}
-		
-		//テスト用コード（入力とboardの初期化）
-		
-		/*System.out.println("boardの状態 座標を返す");
-		for(int i = 0; i < 8; i++){
-			for(int j = 0; j < 8; j++)
-				System.out.print(" " + board[i][j].coordinate);
-			System.out.println();
+			if(IfFinish.finish(board))
+				break;
 		}
-		System.out.println();
-		System.out.println("黒と白の初期位置");
-		for(int i = 0; i < 8; i++){
-			for(int j = 0; j < 8; j++){
-				if(board[i][j].state == State.Black)
-					System.out.println(board[i][j].coordinate + " = black");
-				if(board[i][j].state == State.White)
-					System.out.println(board[i][j].coordinate + " = white");
-			}
-		}
-		System.out.println();
-		System.out.println("黒と白が打てるところ");
-		for(int i = 0; i < 8; i++)
-			for(int j = 0; j < 8; j++){
-				if(board[i][j].blackNextMove)
-					System.out.println("black can move to " + board[i][j].coordinate);
-				if(board[i][j].whiteNextMove)
-					System.out.println("white can move to " + board[i][j].coordinate);
-			}
-
-		System.out.println(board[5][3].whiteNextMove);
-		System.out.println(board[5][3].up[0] + ", " + board[5][3].up[1]);*/
 	}
 }

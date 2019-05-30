@@ -64,8 +64,10 @@ public class AlphaBeta {
 			}
 			double m = alpha;
 			if(level % 2 == 0){
+				System.out.println(sort[0]);
 				MySort.descending(board, sort, white);
 				for(int i = 0; i < sort.length; i++){
+System.out.println(sort[i]);
 					SetBoard.setboard(board, sort[i], white);
 					char[] ch = sort[i].toCharArray();
 					int l = ch[1] - '1';

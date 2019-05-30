@@ -14,6 +14,7 @@ class MySort extends MyEnum {
 				}
 			}
 		}
+		
 		for(int i = 0; sort[i] != null; i++){
 			char[] ch = sort[i].toCharArray();
 			int l = ch[1] - '1';
@@ -36,19 +37,24 @@ class MySort extends MyEnum {
 	}
 
 	static void descending(Board[][] board, String[] sort, boolean white){
+		System.out.println("This is MySort.descending.");
 		int k = 0;
+		for(int i = 0; i < sort.length; i++)
+			System.out.println(sort[i]);
 		for(int i = 0; i < 8; i++){
 			for(int j = 0; j < 8; j++){
 				if(white){
 					if(board[i][j].state == State.Empty && board[i][j].blackNextMove)
-						sort[k++] = board[i][j].coordinate; 
+						sort[k] = board[i][j].coordinate;
+						k++;
 				}else{
 					if(board[i][j].state == State.Empty && board[i][j].blackNextMove)
-						sort[k++] = board[i][j].coordinate; 
-
+						sort[k] = board[i][j].coordinate; 
+						k++
 				}
 			}
 		}
+
 		for(int i = 0; sort[i] != null; i++){
 			char[] ch = sort[i].toCharArray();
 			int l = ch[1] - '1';

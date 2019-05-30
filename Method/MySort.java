@@ -5,11 +5,14 @@ class MySort extends MyEnum {
 		for(int i = 0; i < 8; i++){
 			for(int j = 0; j < 8; j++){
 				if(white){
-					if(board[i][j].state == State.Empty && board[i][j].blackNextMove)
-						sort[k++] = board[i][j].coordinate; 
+					if(board[i][j].state == State.Empty && board[i][j].blackNextMove){
+						sort[k] = board[i][j].coordinate; 
+						k++;
+					}
 				}else{
-					if(board[i][j].state == State.Empty && board[i][j].blackNextMove)
-						sort[k++] = board[i][j].coordinate; 
+					if(board[i][j].state == State.Empty && board[i][j].blackNextMove){
+						sort[k] = board[i][j].coordinate; 
+					}
 
 				}
 			}

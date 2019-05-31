@@ -32,15 +32,29 @@ OutPut.output(board);
 				
 				//探索をする
 				System.out.println("Start Search!!!!!");
-				System.out.println("-------------------------------------------");
-				my = AlphaBeta.startsearch(board, white); 
-				System.out.println("-------------------------------------------");
+				boolean check = false;
+				BP:for(int i = 0; i < 8; i++)
+					for(int j = 0; j < 8; j++)
+						if(board[i][j].whiteNextMove){
+							check = true;
+							break BP;
+						}
+				if(check){
+					my = AlphaBeta.startsearch(board, white); 
+
 
 				//自分の手を出力する
+				System.out.println();
+				System.out.println("^^^^^^^^^^^^^^^^^^^^");
 				System.out.println("I put stone at " + my);
+				System.out.println("vvvvvvvvvvvvvvvvvvvv");
+				System.out.println();
 
 				//boardを更新する。
  				SetBoard.setboard(board, my, white);
+				}else{
+					System.out.println("I can't move........");
+				}
 
 				//ボードの状態を表示する
 				OutPut.output(board);
@@ -48,15 +62,29 @@ OutPut.output(board);
 			}else{//先手のとき
 				//探索をする
 				System.out.println("Start Search!!!!!");
-				System.out.println("-------------------------------------------");
-				my = AlphaBeta.startsearch(board, white); 
-				System.out.println("-------------------------------------------");
+				boolean check = false;
+				BP:for(int i = 0; i < 8; i++)
+					for(int j = 0; j < 8; j++)
+						if(board[i][j].blackNextMove){
+							check = true;
+							break BP;
+						}
+				if(check){
+					my = AlphaBeta.startsearch(board, white); 
+
 
 				//自分の手を出力する
+				System.out.println();
+				System.out.println("^^^^^^^^^^^^^^^^^^^^");
 				System.out.println("I put stone at " + my);
+				System.out.println("vvvvvvvvvvvvvvvvvvvv");
+				System.out.println();
 
 				//boardを更新する。
-				SetBoard.setboard(board, my, white);
+ 				SetBoard.setboard(board, my, white);
+				}else{
+					System.out.println("I can't move........");
+				}
 
 				//ボードの状態を表示する
 				OutPut.output(board);

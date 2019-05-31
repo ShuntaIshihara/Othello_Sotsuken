@@ -26,13 +26,9 @@ public class AlphaBeta {
 
 		//-----------------------------------------------------------
 		//alphabetaメソッドを呼び出す。
-		System.out.println("Start Alpha-Beta Method!!!!!");
-		System.out.println("---------------------------------------");
 		double k = alphabeta(probe, 0, 0, 0, Double.MIN_VALUE, Double.MAX_VALUE, white);
-		System.out.println("---------------------------------------");
-		System.out.println("Finish Alpha-Beta Method!!!!!");
 		//-----------------------------------------------------------
-		double max = Double.MIN_VALUE;
+		/*double max = Double.MIN_VALUE;
 		int l = 0;
 		int r = 0;
 		if(white){
@@ -52,11 +48,28 @@ public class AlphaBeta {
 					r = j;
 				}
 		}
-		return board[l][r].coordinate;
+		return board[l][r].coordinate;*/
+
+		for(int i = 0; i < 8; i++)
+			for(int j = 0; j < 8; j++)
+				if(probe[i][j].move)
+					return board[i][j].coordinate;
+
+		for(int i = 0; i < 8; i++)
+			for(int j = 0; j < 8; j++){
+
+				if(white){
+					if(board[i][j].whiteNextMove)
+						return board[i][j].coordinate;
+				}else{
+					if(board[i][j].blackNextMove)
+						return board[i][j].coordinate;
+				}
+			}
+		return null;	
 	}
 
 	private static double alphabeta(Board[][] board, int level, int line, int row,  double alpha, double beta,  boolean white){
-		System.out.println("Level " + level);
 		//局面がゲームの終わり
 		if(IfFinish.finish(board)){
 			switch(IfFinish.result(board, white)){
@@ -87,6 +100,29 @@ public class AlphaBeta {
 				int l = ch[1] - '1';
 				int r = ch[0] - 'a';
 				double v = -alphabeta(board, level+1, l, r, -beta, -m, !white);
+				switch(sort[i]){
+					case "a1" : v += -10.0; break;				
+					case "h1" : v += -10.0; break;
+					case "a8" : v += -10.0; break;
+					case "h8" : v += -10.0; break;
+
+					case "a2" : v += 10.0; break;
+					case "b1" : v += 10.0; break;
+					case "b2" : v += 10.0; break;
+					case "h2" : v += 10.0; break;
+					case "g1" : v += 10.0; break;
+					case "g2" : v += 10.0; break;
+					case "a7" : v += 10.0; break;
+					case "b8" : v += 10.0; break;
+					case "b7" : v += 10.0; break;
+					case "h7" : v += 10.0; break;
+					case "g7" : v += 10.0; break;
+					case "g8" : v += 10.0; break;
+
+					default : break;
+				}
+				line = l;
+				row = r;
 				if(v > m){
 					m = v;
 					if(m >= beta){
@@ -94,6 +130,10 @@ public class AlphaBeta {
 					}
 				}
 			}
+			for(int i = 0; i < 8; i++)
+				for(int j = 0; j < 8; j++)
+					board[i][j].move = false;
+			board[line][row].move = true;
 			board[line][row].importance = m;
 			return board[line][row].importance;
 		}
@@ -105,6 +145,29 @@ public class AlphaBeta {
 			int l = ch[1] - '1';
 			int r = ch[0] - 'a';
 			double v = -alphabeta(board, level+1, l, r, -beta, -m, !white);
+			switch(sort[i]){
+				case "a1" : v += -10.0; break;				
+				case "h1" : v += -10.0; break;
+				case "a8" : v += -10.0; break;
+				case "h8" : v += -10.0; break;
+
+				case "a2" : v += 10.0; break;
+				case "b1" : v += 10.0; break;
+				case "b2" : v += 10.0; break;
+				case "h2" : v += 10.0; break;
+				case "g1" : v += 10.0; break;
+				case "g2" : v += 10.0; break;
+				case "a7" : v += 10.0; break;
+				case "b8" : v += 10.0; break;
+				case "b7" : v += 10.0; break;
+				case "h7" : v += 10.0; break;
+				case "g7" : v += 10.0; break;
+				case "g8" : v += 10.0; break;
+
+				default : break;
+			}
+			line = l;
+			row = r;
 			if(v > m){
 				m = v;
 				if(m >= beta){
@@ -112,6 +175,10 @@ public class AlphaBeta {
 				}
 			}
 		}
+		for(int i = 0; i < 8; i++)
+			for(int j = 0; j < 8; j++)
+				board[i][j].move = false;
+		board[line][row].move = true;
 		board[line][row].importance = m;
 		return board[line][row].importance;
 	}

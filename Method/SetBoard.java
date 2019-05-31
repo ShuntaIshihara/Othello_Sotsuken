@@ -49,6 +49,8 @@ public class SetBoard extends MyEnum{
 	}
 
 	public static void setboard(Board[][] board, String coordinate, boolean white){
+		if(coordinate.equals("pass"))
+			return;
 		//指定された座標（文字列）をIndex（数字）に変換する。
 		char[] ch = coordinate.toCharArray();
 		int line = ch[1] - '1';

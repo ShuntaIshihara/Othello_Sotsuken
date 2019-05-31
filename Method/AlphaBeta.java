@@ -101,23 +101,23 @@ public class AlphaBeta {
 				int r = ch[0] - 'a';
 				double v = -alphabeta(board, level+1, l, r, -beta, -m, !white);
 				switch(sort[i]){
-					case "a1" : v += -10.0; break;				
-					case "h1" : v += -10.0; break;
-					case "a8" : v += -10.0; break;
-					case "h8" : v += -10.0; break;
+					case "a1" : v += -100.0; break;				
+					case "h1" : v += -100.0; break;
+					case "a8" : v += -100.0; break;
+					case "h8" : v += -100.0; break;
 
-					case "a2" : v += 10.0; break;
-					case "b1" : v += 10.0; break;
-					case "b2" : v += 10.0; break;
-					case "h2" : v += 10.0; break;
-					case "g1" : v += 10.0; break;
-					case "g2" : v += 10.0; break;
-					case "a7" : v += 10.0; break;
-					case "b8" : v += 10.0; break;
-					case "b7" : v += 10.0; break;
-					case "h7" : v += 10.0; break;
-					case "g7" : v += 10.0; break;
-					case "g8" : v += 10.0; break;
+					case "a2" : v += 100.0; break;
+					case "b1" : v += 100.0; break;
+					case "b2" : v += 100.0; break;
+					case "h2" : v += 100.0; break;
+					case "g1" : v += 100.0; break;
+					case "g2" : v += 100.0; break;
+					case "a7" : v += 100.0; break;
+					case "b8" : v += 100.0; break;
+					case "b7" : v += 100.0; break;
+					case "h7" : v += 100.0; break;
+					case "g7" : v += 100.0; break;
+					case "g8" : v += 100.0; break;
 
 					default : break;
 				}
@@ -146,23 +146,23 @@ public class AlphaBeta {
 			int r = ch[0] - 'a';
 			double v = -alphabeta(board, level+1, l, r, -beta, -m, !white);
 			switch(sort[i]){
-				case "a1" : v += -10.0; break;				
-				case "h1" : v += -10.0; break;
-				case "a8" : v += -10.0; break;
-				case "h8" : v += -10.0; break;
+				case "a1" : v += -100.0; break;				
+				case "h1" : v += -100.0; break;
+				case "a8" : v += -100.0; break;
+				case "h8" : v += -100.0; break;
 
-				case "a2" : v += 10.0; break;
-				case "b1" : v += 10.0; break;
-				case "b2" : v += 10.0; break;
-				case "h2" : v += 10.0; break;
-				case "g1" : v += 10.0; break;
-				case "g2" : v += 10.0; break;
-				case "a7" : v += 10.0; break;
-				case "b8" : v += 10.0; break;
-				case "b7" : v += 10.0; break;
-				case "h7" : v += 10.0; break;
-				case "g7" : v += 10.0; break;
-				case "g8" : v += 10.0; break;
+				case "a2" : v += 100.0; break;
+				case "b1" : v += 100.0; break;
+				case "b2" : v += 100.0; break;
+				case "h2" : v += 100.0; break;
+				case "g1" : v += 100.0; break;
+				case "g2" : v += 100.0; break;
+				case "a7" : v += 100.0; break;
+				case "b8" : v += 100.0; break;
+				case "b7" : v += 100.0; break;
+				case "h7" : v += 100.0; break;
+				case "g7" : v += 100.0; break;
+				case "g8" : v += 100.0; break;
 
 				default : break;
 			}

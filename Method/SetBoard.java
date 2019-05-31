@@ -366,7 +366,6 @@ public class SetBoard extends MyEnum{
 						}
 						if(check){
 							board[line][row].blackNextMove = true;
-							board[line][row].whiteNextMove = false;
 						}
 					}else if(board[line+i][row+j].state == State.Black){
 						boolean check = false;
@@ -427,7 +426,6 @@ public class SetBoard extends MyEnum{
 							}
 						}
 						if(check){
-							board[line][row].blackNextMove = false;
 							board[line][row].whiteNextMove = true;
 						}
 					}

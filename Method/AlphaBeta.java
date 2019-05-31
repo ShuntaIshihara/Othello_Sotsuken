@@ -35,14 +35,24 @@ public class AlphaBeta {
 		double max = Double.MIN_VALUE;
 		int l = 0;
 		int r = 0;
+		if(white){
 		for(int i = 0; i < 8; i++)
 			for(int j = 0; j < 8; j++)
-				if(probe[i][j].importance > max){
+				if(board[i][j].whiteNextMove && probe[i][j].importance > max){
 					max = probe[i][j].importance;
 					l = i;
 					r = j;
 				}
-		return probe[l][r].coordinate;
+		}else{
+			for(int i = 0; i < 8; i++)
+				for(int j = 0; j < 8; j++)
+				if(board[i][j].blackNextMove && probe[i][j].importance > max){
+					max = probe[i][j].importance;
+					l = i;
+					r = j;
+				}
+		}
+		return board[l][r].coordinate;
 	}
 
 	private static double alphabeta(Board[][] board, int level, int line, int row,  double alpha, double beta,  boolean white){

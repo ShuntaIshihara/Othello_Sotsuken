@@ -21,8 +21,22 @@ OutPut.output(board);
 		while(true){
 			//後手のとき
 			if(white){
+
+				boolean check = false;
 				//相手の一手を入力する。
+				BP:for(int i = 0; i < 8; i++)
+					for(int j = 0; j < 8; j++)
+						if(board[i][j].blackNextMove){
+							check = true;
+							break BP;
+						}
+				if(check){
 				opponent = InputOpponentMove.inputopponentmove(board, !white);
+				}else{
+					System.out.println();
+					System.out.println("You can not put anywhere.....");
+					System.out.println();
+				}
 
 				//入力された相手の手の座標からboardを更新する。
 				SetBoard.setboard(board, opponent, !white);
@@ -32,7 +46,7 @@ OutPut.output(board);
 				
 				//探索をする
 				System.out.println("Start Search!!!!!");
-				boolean check = false;
+				check = false;
 				BP:for(int i = 0; i < 8; i++)
 					for(int j = 0; j < 8; j++)
 						if(board[i][j].whiteNextMove){
@@ -90,7 +104,20 @@ OutPut.output(board);
 				OutPut.output(board);
 
 				//相手の一手を入力する。
+				check = false;
+				BP:for(int i = 0; i < 8; i++)
+	   				for(int j = 0; j < 8; j++)
+						if(board[i][j].whiteNextMove){
+							check = true;
+							break BP;
+						}
+				if(check){
 				opponent = InputOpponentMove.inputopponentmove(board, !white);
+				}else{
+					System.out.println();
+					System.out.println("You can not put anywhere.....");
+					System.out.println();
+				}
 
 				//入力された相手の手の座標からboardを更新する。
 				SetBoard.setboard(board, opponent, !white);

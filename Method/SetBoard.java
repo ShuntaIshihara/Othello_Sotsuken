@@ -31,21 +31,12 @@ public class SetBoard extends MyEnum{
 					case "e5" : board[i][j] = new Board(coordinate, State.White, false, false, 0);
 								break;
 
-								//黒が打てるところ
-					case "d3" : board[i][j] = new Board(coordinate, State.Empty, false, true, 0, null, "d5", null, null);
-								break;
-					case "c4" : board[i][j] = new Board(coordinate, State.Empty, false, true, 0, null, null, null, "e4");
-								break;
-					case "f5" : board[i][j] = new Board(coordinate, State.Empty, false, true, 0, null, null, "d5", null);
-								break;
-					case "e6" : board[i][j] = new Board(coordinate, State.Empty, false, true, 0, "e4", null, null, null);
-								break;
-
 								//その他
 					default : board[i][j] = new Board(coordinate, State.Empty, false, false, 0);
 				}
 			}
 		}
+		renew(board);
 	}
 
 	public static void setboard(Board[][] board, String coordinate, boolean white){

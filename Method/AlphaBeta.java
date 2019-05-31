@@ -28,36 +28,15 @@ public class AlphaBeta {
 		//alphabetaメソッドを呼び出す。
 		double k = alphabeta(probe, 0, 0, 0, Double.MIN_VALUE, Double.MAX_VALUE, white);
 		//-----------------------------------------------------------
-		/*double max = Double.MIN_VALUE;
-		int l = 0;
-		int r = 0;
-		if(white){
 		for(int i = 0; i < 8; i++)
 			for(int j = 0; j < 8; j++)
-				if(board[i][j].whiteNextMove && probe[i][j].importance > max){
-					max = probe[i][j].importance;
-					l = i;
-					r = j;
-				}
-		}else{
-			for(int i = 0; i < 8; i++)
-				for(int j = 0; j < 8; j++)
-				if(board[i][j].blackNextMove && probe[i][j].importance > max){
-					max = probe[i][j].importance;
-					l = i;
-					r = j;
-				}
-		}
-		return board[l][r].coordinate;*/
-
-		for(int i = 0; i < 8; i++)
-			for(int j = 0; j < 8; j++)
-				if(probe[i][j].move)
+				if(probe[i][j].move){
 					return board[i][j].coordinate;
+				}
 
+/*
 		for(int i = 0; i < 8; i++)
 			for(int j = 0; j < 8; j++){
-
 				if(white){
 					if(board[i][j].whiteNextMove)
 						return board[i][j].coordinate;
@@ -66,6 +45,7 @@ public class AlphaBeta {
 						return board[i][j].coordinate;
 				}
 			}
+*/
 		return null;	
 	}
 
@@ -81,7 +61,27 @@ public class AlphaBeta {
 		//深さの限界に達したとき
 		if(level >= 4){
 			//評価関数の値を返す。
-			board[line][row].importance = EvaluationFunction.evaluation(board, white);
+			switch(board[line][row].coordinate){
+				case "a1" : board[line][row].importance = EvaluationFunction.evaluation(board, white)+15.0; break;				
+				case "h1" : board[line][row].importance = EvaluationFunction.evaluation(board, white)+15.0; break;
+				case "a8" : board[line][row].importance = EvaluationFunction.evaluation(board, white)+15.0; break;
+				case "h8" : board[line][row].importance = EvaluationFunction.evaluation(board, white)+15.0; break;
+
+				case "a2" : board[line][row].importance = EvaluationFunction.evaluation(board, white)-15.0; break;
+				case "b1" : board[line][row].importance = EvaluationFunction.evaluation(board, white)-15.0; break;
+				case "b2" : board[line][row].importance = EvaluationFunction.evaluation(board, white)-15.0; break;
+				case "h2" : board[line][row].importance = EvaluationFunction.evaluation(board, white)-15.0; break;
+				case "g1" : board[line][row].importance = EvaluationFunction.evaluation(board, white)-15.0; break;
+				case "g2" : board[line][row].importance = EvaluationFunction.evaluation(board, white)-15.0; break;
+				case "a7" : board[line][row].importance = EvaluationFunction.evaluation(board, white)-15.0; break;
+				case "b8" : board[line][row].importance = EvaluationFunction.evaluation(board, white)-15.0; break;
+				case "b7" : board[line][row].importance = EvaluationFunction.evaluation(board, white)-15.0; break;
+				case "h7" : board[line][row].importance = EvaluationFunction.evaluation(board, white)-15.0; break;
+				case "g7" : board[line][row].importance = EvaluationFunction.evaluation(board, white)-15.0; break;
+				case "g8" : board[line][row].importance = EvaluationFunction.evaluation(board, white)-15.0; break;
+
+				default : board[line][row].importance = EvaluationFunction.evaluation(board, white); break;
+			}
 			return board[line][row].importance;
 		}
 		//それ以外のとき
@@ -100,7 +100,7 @@ public class AlphaBeta {
 				int l = ch[1] - '1';
 				int r = ch[0] - 'a';
 				double v = -alphabeta(board, level+1, l, r, -beta, -m, !white);
-				switch(sort[i]){
+/*				switch(sort[i]){
 					case "a1" : v += -100.0; break;				
 					case "h1" : v += -100.0; break;
 					case "a8" : v += -100.0; break;
@@ -120,7 +120,7 @@ public class AlphaBeta {
 					case "g8" : v += 100.0; break;
 
 					default : break;
-				}
+				}*/
 				line = l;
 				row = r;
 				if(v > m){
@@ -145,7 +145,7 @@ public class AlphaBeta {
 			int l = ch[1] - '1';
 			int r = ch[0] - 'a';
 			double v = -alphabeta(board, level+1, l, r, -beta, -m, !white);
-			switch(sort[i]){
+/*			switch(sort[i]){
 				case "a1" : v += -100.0; break;				
 				case "h1" : v += -100.0; break;
 				case "a8" : v += -100.0; break;
@@ -165,7 +165,7 @@ public class AlphaBeta {
 				case "g8" : v += 100.0; break;
 
 				default : break;
-			}
+			}*/
 			line = l;
 			row = r;
 			if(v > m){

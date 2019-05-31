@@ -47,8 +47,6 @@ BP:for(int i = 0; i < 8; i++){
 	   }
    }
 
-if(str.equals("pass"))
-	check = true;
    //checkがfalseのときはメッセージを出す。
    if(!check)
 	   System.err.println("You don't choose this square!\nPlease choose another one.");

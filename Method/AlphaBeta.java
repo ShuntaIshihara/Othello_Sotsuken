@@ -26,87 +26,83 @@ public class AlphaBeta {
 
 		//-----------------------------------------------------------
 		//alphabetaメソッドを呼び出す。
+		System.out.println("Start Alpha-Beta Method!!!!!");
+		System.out.println("---------------------------------------");
 		double k = alphabeta(probe, 0, 0, 0, Double.MIN_VALUE, Double.MAX_VALUE, white);
+		System.out.println("---------------------------------------");
+		System.out.println("Finish Alpha-Beta Method!!!!!");
 		//-----------------------------------------------------------
+		double max = Double.MIN_VALUE;
+		int l = 0;
+		int r = 0;
 		for(int i = 0; i < 8; i++)
 			for(int j = 0; j < 8; j++)
-				if(probe[i][j].move)
-					return probe[i][j].coordinate;
-		return null;
+				if(probe[i][j].importance > max){
+					max = probe[i][j].importance;
+					l = i;
+					r = j;
+				}
+		return probe[l][r].coordinate;
 	}
 
 	private static double alphabeta(Board[][] board, int level, int line, int row,  double alpha, double beta,  boolean white){
+		System.out.println("Level " + level);
 		//局面がゲームの終わり
 		if(IfFinish.finish(board)){
 			switch(IfFinish.result(board, white)){
-				case 0 : board[line][row].move = true; 
-						 return 1.0;
-				case 1 : board[line][row].move = true; 
-						 return 0.0;
-				case 2 : board[line][row].move = true; 
-						 return -1.0;
+				case 0 : return 1.0;
+				case 1 : return 0.0;
+				case 2 : return -1.0;
 			}
 		}
 		//深さの限界に達したとき
-		else if(level >= 4){
+		if(level >= 4){
 			//評価関数の値を返す。
 			board[line][row].importance = EvaluationFunction.evaluation(board, white);
-			board[line][row].move = true;
 			return board[line][row].importance;
 		}
 		//それ以外のとき
-		else{
-			//重要度が高い順に探索する。
-			//相手のとき（levelが奇数のとき）は重要度が低い順に探索する。
-			String[] sort = new String[30];
-			for(int i = 0; i < sort.length; i++){
-				sort[i] = null;
-			}
-			double m = alpha;
-			if(level % 2 == 0){
-				System.out.println(sort[0]);
-				MySort.descending(board, sort, white);
-				for(int i = 0; i < sort.length; i++){
-System.out.println(sort[i]);
-					SetBoard.setboard(board, sort[i], white);
-					char[] ch = sort[i].toCharArray();
-					int l = ch[1] - '1';
-					int r = ch[0] - 'a';
-					double v = -alphabeta(board, level+1, l, r, -beta, -m, !white);
-					if(v > m){
-						m = v;
-						if(m >= beta){
-							board[l][r].importance = m;
-							for(int a = 0; a < 8; a++)
-								for(int b = 0; b < 8; b++)
-									board[a][b].move = false;
-							board[l][r].move = true;
-							return board[l][r].importance;
-						}
+		//重要度が高い順に探索する。
+		//相手のとき（levelが奇数のとき）は重要度が低い順に探索する。
+		String[] sort = new String[30];
+		for(int i = 0; i < sort.length; i++){
+			sort[i] = null;
+		}
+		double m = alpha;
+		if(level % 2 == 0){
+			MySort.descending(board, sort, white);
+			BP:for(int i = 0; sort[i] != null; i++){
+				SetBoard.setboard(board, sort[i], white);
+				char[] ch = sort[i].toCharArray();
+				int l = ch[1] - '1';
+				int r = ch[0] - 'a';
+				double v = -alphabeta(board, level+1, l, r, -beta, -m, !white);
+				if(v > m){
+					m = v;
+					if(m >= beta){
+						break BP;
 					}
 				}
-			}else{
-				MySort.ascending(board, sort, white);
-				for(int i = 0; i < sort.length; i++){
-					SetBoard.setboard(board, sort[i], white);
-					char[] ch = sort[i].toCharArray();
-					int l = ch[1] - '1';
-					int r = ch[0] - 'a';
-					double v = -alphabeta(board, level+1, l, r, -beta, -m, !white);
-					if(v > m){
-						m = v;
-						if(m >= beta){
-							board[l][r].importance = m;
-							for(int a = 0; a < 8; a++)
-								for(int b = 0; b < 8; b++)
-									board[a][b].move = false;
-							board[l][r].move = true;
-							return board[l][r].importance;
-						}
-					}
+			}
+			board[line][row].importance = m;
+			return board[line][row].importance;
+		}
+
+		MySort.ascending(board, sort, white);
+		BP:for(int i = 0; sort[i] != null; i++){
+			SetBoard.setboard(board, sort[i], white);
+			char[] ch = sort[i].toCharArray();
+			int l = ch[1] - '1';
+			int r = ch[0] - 'a';
+			double v = -alphabeta(board, level+1, l, r, -beta, -m, !white);
+			if(v > m){
+				m = v;
+				if(m >= beta){
+					break BP;
 				}
 			}
 		}
-		return board[line][row].importance; 
+		board[line][row].importance = m;
+		return board[line][row].importance;
 	}
 }

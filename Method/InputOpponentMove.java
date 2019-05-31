@@ -9,7 +9,7 @@ public class InputOpponentMove {
 		boolean check = false;
 		String str = null;
 		do{
-			System.out.print("Which square did my opponent choose? : ");
+			System.out.print("Which square do you choose? : ");
 
 			Scanner scan = new Scanner(System.in);
 			str = scan.next();

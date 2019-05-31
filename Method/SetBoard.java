@@ -19,44 +19,8 @@ public class SetBoard extends MyEnum{
 				//とりあえず今はこれ
 				//あとで初期状態と初期状態のときに打てる場所を探すようにする。
 				switch(coordinate){
-					//隅の重要度
-					case "a1" : board[i][j] = new Board(coordinate, State.Empty, false, false, 10.0);
-								break;
-					case "h1" : board[i][j] = new Board(coordinate, State.Empty, false, false, 10.0);
-								break;
-					case "a8" : board[i][j] = new Board(coordinate, State.Empty, false, false, 10.0);
-								break;
-					case "h8" : board[i][j] = new Board(coordinate, State.Empty, false, false, 10.0);
-								break;
-
-								//X,Cの重要度
-					case "b1" : board[i][j] = new Board(coordinate, State.Empty, false, false, -10.0); 
-								break;
-					case "b2" : board[i][j] = new Board(coordinate, State.Empty, false, false, -10.0); 
-								break;
-					case "b7" : board[i][j] = new Board(coordinate, State.Empty, false, false, -10.0); 
-								break;
-					case "b8" : board[i][j] = new Board(coordinate, State.Empty, false, false, -10.0); 
-								break;
-					case "g1" : board[i][j] = new Board(coordinate, State.Empty, false, false, -10.0); 
-								break;
-					case "g2" : board[i][j] = new Board(coordinate, State.Empty, false, false, -10.0); 
-								break;
-					case "g7" : board[i][j] = new Board(coordinate, State.Empty, false, false, -10.0); 
-								break;
-					case "g8" : board[i][j] = new Board(coordinate, State.Empty, false, false, -10.0); 
-								break;
-					case "a2" : board[i][j] = new Board(coordinate, State.Empty, false, false, -10.0); 
-								break;
-					case "a7" : board[i][j] = new Board(coordinate, State.Empty, false, false, -10.0); 
-								break;
-					case "h2" : board[i][j] = new Board(coordinate, State.Empty, false, false, -10.0); 
-								break;
-					case "h7" : board[i][j] = new Board(coordinate, State.Empty, false, false, -10.0); 
-								break;
-
-								//黒の初期位置
-					case "e4" :	board[i][j] = new Board(coordinate, State.Black, false, false, 0);
+					//黒の初期位置
+					case "e4" : board[i][j] = new Board(coordinate, State.Black, false, false, 0);
 								break;
 					case "d5" : board[i][j] = new Board(coordinate, State.Black, false, false, 0);
 								break;
@@ -358,38 +322,38 @@ public class SetBoard extends MyEnum{
 									check = true;
 									if(i == -1){
 										if(j == -1){
-											board[line][row].up_left[0] = x;
-											board[line][row].up_left[1] = y;
+											board[line][row].up_left[0] = line+x;
+											board[line][row].up_left[1] = row+y;
 										}
 										if(j == 0){
-											board[line][row].up[0] = x;
-											board[line][row].up[1] = y;
+											board[line][row].up[0] = line+x;
+											board[line][row].up[1] = row+y;
 										}
 										if(j == 1){
-											board[line][row].up_right[0] = x;
-											board[line][row].up_right[1] = y;
+											board[line][row].up_right[0] = line+x;
+											board[line][row].up_right[1] = row+y;
 										}
 									}else if(i == 0){
 										if(j == -1){
-											board[line][row].left[0] = x;
-											board[line][row].left[1] = y;
+											board[line][row].left[0] = line+x;
+											board[line][row].left[1] = row+y;
 										}
 										if(j == 1){
-											board[line][row].right[0] = x;
-											board[line][row].right[1] = y;
+											board[line][row].right[0] = line+x;
+											board[line][row].right[1] = row+y;
 										}
 									}else if(i == 1){
 										if(j == -1){
-											board[line][row].down_left[0] = x;
-											board[line][row].down_left[1] = y;
+											board[line][row].down_left[0] = line+x;
+											board[line][row].down_left[1] = row+y;
 										}
 										if(j == 0){
-											board[line][row].down[0] = x;
-											board[line][row].down[1] = y;
+											board[line][row].down[0] = line+x;
+											board[line][row].down[1] = row+y;
 										}
 										if(j == 1){
-											board[line][row].down_right[0] = x;
-											board[line][row].down_right[1] = y;
+											board[line][row].down_right[0] = line+x;
+											board[line][row].down_right[1] = row+y;
 										}
 									}
 								}
@@ -420,38 +384,38 @@ public class SetBoard extends MyEnum{
 									check = true;
 									if(i == -1){
 										if(j == -1){
-											board[line][row].up_left[0] = x;
-											board[line][row].up_left[1] = y;
+											board[line][row].up_left[0] = line+x;
+											board[line][row].up_left[1] = row+y;
 										}
 										if(j == 0){
-											board[line][row].up[0] = x;
-											board[line][row].up[1] = y;
+											board[line][row].up[0] = line+x;
+											board[line][row].up[1] = row+y;
 										}
 										if(j == 1){
-											board[line][row].up_right[0] = x;
-											board[line][row].up_right[1] = y;
+											board[line][row].up_right[0] = line+x;
+											board[line][row].up_right[1] = row+y;
 										}
 									}else if(i == 0){
 										if(j == -1){
-											board[line][row].left[0] = x;
-											board[line][row].left[1] = y;
+											board[line][row].left[0] = line+x;
+											board[line][row].left[1] = row+y;
 										}
 										if(j == 1){
-											board[line][row].right[0] = x;
-											board[line][row].right[1] = y;
+											board[line][row].right[0] = line+x;
+											board[line][row].right[1] = row+y;
 										}
 									}else if(i == 1){
 										if(j == -1){
-											board[line][row].down_left[0] = x;
-											board[line][row].down_left[1] = y;
+											board[line][row].down_left[0] = line+x;
+											board[line][row].down_left[1] = row+y;
 										}
 										if(j == 0){
-											board[line][row].down[0] = x;
-											board[line][row].down[1] = y;
+											board[line][row].down[0] = line+x;
+											board[line][row].down[1] = row+y;
 										}
 										if(j == 1){
-											board[line][row].down_right[0] = x;
-											board[line][row].down_right[1] = y;
+											board[line][row].down_right[0] = line+x;
+											board[line][row].down_right[1] = row+y;
 										}
 									}
 								}

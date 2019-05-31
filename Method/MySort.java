@@ -5,13 +5,14 @@ class MySort extends MyEnum {
 		for(int i = 0; i < 8; i++){
 			for(int j = 0; j < 8; j++){
 				if(white){
-					if(board[i][j].state == State.Empty && board[i][j].blackNextMove){
+					if(board[i][j].state == State.Empty && board[i][j].whiteNextMove){
 						sort[k] = board[i][j].coordinate; 
 						k++;
 					}
 				}else{
 					if(board[i][j].state == State.Empty && board[i][j].blackNextMove){
-						sort[k] = board[i][j].coordinate; 
+						sort[k] = board[i][j].coordinate;
+						k++; 
 					}
 
 				}
@@ -27,7 +28,7 @@ class MySort extends MyEnum {
 			for(int j = i; sort[j] != null; j++){
 				ch = sort[j].toCharArray();
 				l = ch[1] - '1';
-				r = ch[0] - '0';
+				r = ch[0] - 'a';
 				if(board[l][r].importance < min){
 					min = board[l][r].importance;
 					k = j;
@@ -40,16 +41,12 @@ class MySort extends MyEnum {
 	}
 
 	static void descending(Board[][] board, String[] sort, boolean white){
-		System.out.println("This is MySort.descending.");
 		int k = 0;
-		for(int i = 0; i < sort.length; i++)
-			System.out.println(sort[i]);
 		for(int i = 0; i < 8; i++){
 			for(int j = 0; j < 8; j++){
 				if(white){
-					if(board[i][j].state == State.Empty && board[i][j].blackNextMove){
+					if(board[i][j].state == State.Empty && board[i][j].whiteNextMove){
 						sort[k] = board[i][j].coordinate;
-						System.out.println("k = "+k);
 						k++;
 					}
 				}else{
@@ -70,7 +67,7 @@ class MySort extends MyEnum {
 			for(int j = i; sort[j] != null; j++){
 				ch = sort[j].toCharArray();
 				l = ch[1] - '1';
-				r = ch[0] - '0';
+				r = ch[0] - 'a';
 				if(board[l][r].importance > max){
 					max = board[l][r].importance;
 					k = j;

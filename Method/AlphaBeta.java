@@ -37,6 +37,7 @@ public class AlphaBeta {
 	}
 
 	private static double alphabeta(Board[][] board, int level, int line, int row,  double alpha, double beta,  boolean white){
+		System.out.println("level = " + level);
 		//局面がゲームの終わり
 		if(IfFinish.finish(board)){
 			switch(IfFinish.result(board, white)){
@@ -46,26 +47,26 @@ public class AlphaBeta {
 			}
 		}
 		//深さの限界に達したとき
-		if(level >= 8){
+		if(level >= 4){
 			//評価関数の値を返す。
 			switch(board[line][row].coordinate){
-				case "a1" : board[line][row].importance = EvaluationFunction.evaluation(board, white)+15.0; break;				
-				case "h1" : board[line][row].importance = EvaluationFunction.evaluation(board, white)+15.0; break;
-				case "a8" : board[line][row].importance = EvaluationFunction.evaluation(board, white)+15.0; break;
-				case "h8" : board[line][row].importance = EvaluationFunction.evaluation(board, white)+15.0; break;
+				case "a1" : board[line][row].importance = EvaluationFunction.evaluation(board, white)-15.0; break;				
+				case "h1" : board[line][row].importance = EvaluationFunction.evaluation(board, white)-15.0; break;
+				case "a8" : board[line][row].importance = EvaluationFunction.evaluation(board, white)-15.0; break;
+				case "h8" : board[line][row].importance = EvaluationFunction.evaluation(board, white)-15.0; break;
 
-				case "a2" : board[line][row].importance = EvaluationFunction.evaluation(board, white)-15.0; break;
-				case "b1" : board[line][row].importance = EvaluationFunction.evaluation(board, white)-15.0; break;
-				case "b2" : board[line][row].importance = EvaluationFunction.evaluation(board, white)-15.0; break;
-				case "h2" : board[line][row].importance = EvaluationFunction.evaluation(board, white)-15.0; break;
-				case "g1" : board[line][row].importance = EvaluationFunction.evaluation(board, white)-15.0; break;
-				case "g2" : board[line][row].importance = EvaluationFunction.evaluation(board, white)-15.0; break;
-				case "a7" : board[line][row].importance = EvaluationFunction.evaluation(board, white)-15.0; break;
-				case "b8" : board[line][row].importance = EvaluationFunction.evaluation(board, white)-15.0; break;
-				case "b7" : board[line][row].importance = EvaluationFunction.evaluation(board, white)-15.0; break;
-				case "h7" : board[line][row].importance = EvaluationFunction.evaluation(board, white)-15.0; break;
-				case "g7" : board[line][row].importance = EvaluationFunction.evaluation(board, white)-15.0; break;
-				case "g8" : board[line][row].importance = EvaluationFunction.evaluation(board, white)-15.0; break;
+				case "a2" : board[line][row].importance = EvaluationFunction.evaluation(board, white)+15.0; break;
+				case "b1" : board[line][row].importance = EvaluationFunction.evaluation(board, white)+15.0; break;
+				case "b2" : board[line][row].importance = EvaluationFunction.evaluation(board, white)+15.0; break;
+				case "h2" : board[line][row].importance = EvaluationFunction.evaluation(board, white)+15.0; break;
+				case "g1" : board[line][row].importance = EvaluationFunction.evaluation(board, white)+15.0; break;
+				case "g2" : board[line][row].importance = EvaluationFunction.evaluation(board, white)+15.0; break;
+				case "a7" : board[line][row].importance = EvaluationFunction.evaluation(board, white)+15.0; break;
+				case "b8" : board[line][row].importance = EvaluationFunction.evaluation(board, white)+15.0; break;
+				case "b7" : board[line][row].importance = EvaluationFunction.evaluation(board, white)+15.0; break;
+				case "h7" : board[line][row].importance = EvaluationFunction.evaluation(board, white)+15.0; break;
+				case "g7" : board[line][row].importance = EvaluationFunction.evaluation(board, white)+15.0; break;
+				case "g8" : board[line][row].importance = EvaluationFunction.evaluation(board, white)+15.0; break;
 
 				default : board[line][row].importance = EvaluationFunction.evaluation(board, white); break;
 			}

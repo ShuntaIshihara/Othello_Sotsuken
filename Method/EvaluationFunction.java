@@ -13,8 +13,8 @@ class EvaluationFunction extends MyEnum {
 		}
 
 		if(white){
-			return (double)w - (double)b;
+			return -((double)w - (double)b);
 		}
-		return (double)b - (double)w;
+		return -((double)b - (double)w);
 	}
 }

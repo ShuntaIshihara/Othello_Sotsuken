@@ -33,19 +33,6 @@ public class AlphaBeta {
 				if(probe[i][j].move){
 					return board[i][j].coordinate;
 				}
-
-/*
-		for(int i = 0; i < 8; i++)
-			for(int j = 0; j < 8; j++){
-				if(white){
-					if(board[i][j].whiteNextMove)
-						return board[i][j].coordinate;
-				}else{
-					if(board[i][j].blackNextMove)
-						return board[i][j].coordinate;
-				}
-			}
-*/
 		return null;	
 	}
 
@@ -59,7 +46,7 @@ public class AlphaBeta {
 			}
 		}
 		//深さの限界に達したとき
-		if(level >= 4){
+		if(level >= 8){
 			//評価関数の値を返す。
 			switch(board[line][row].coordinate){
 				case "a1" : board[line][row].importance = EvaluationFunction.evaluation(board, white)+15.0; break;				
@@ -100,27 +87,6 @@ public class AlphaBeta {
 				int l = ch[1] - '1';
 				int r = ch[0] - 'a';
 				double v = -alphabeta(board, level+1, l, r, -beta, -m, !white);
-/*				switch(sort[i]){
-					case "a1" : v += -100.0; break;				
-					case "h1" : v += -100.0; break;
-					case "a8" : v += -100.0; break;
-					case "h8" : v += -100.0; break;
-
-					case "a2" : v += 100.0; break;
-					case "b1" : v += 100.0; break;
-					case "b2" : v += 100.0; break;
-					case "h2" : v += 100.0; break;
-					case "g1" : v += 100.0; break;
-					case "g2" : v += 100.0; break;
-					case "a7" : v += 100.0; break;
-					case "b8" : v += 100.0; break;
-					case "b7" : v += 100.0; break;
-					case "h7" : v += 100.0; break;
-					case "g7" : v += 100.0; break;
-					case "g8" : v += 100.0; break;
-
-					default : break;
-				}*/
 				line = l;
 				row = r;
 				if(v > m){
@@ -145,27 +111,6 @@ public class AlphaBeta {
 			int l = ch[1] - '1';
 			int r = ch[0] - 'a';
 			double v = -alphabeta(board, level+1, l, r, -beta, -m, !white);
-/*			switch(sort[i]){
-				case "a1" : v += -100.0; break;				
-				case "h1" : v += -100.0; break;
-				case "a8" : v += -100.0; break;
-				case "h8" : v += -100.0; break;
-
-				case "a2" : v += 100.0; break;
-				case "b1" : v += 100.0; break;
-				case "b2" : v += 100.0; break;
-				case "h2" : v += 100.0; break;
-				case "g1" : v += 100.0; break;
-				case "g2" : v += 100.0; break;
-				case "a7" : v += 100.0; break;
-				case "b8" : v += 100.0; break;
-				case "b7" : v += 100.0; break;
-				case "h7" : v += 100.0; break;
-				case "g7" : v += 100.0; break;
-				case "g8" : v += 100.0; break;
-
-				default : break;
-			}*/
 			line = l;
 			row = r;
 			if(v > m){

@@ -49,27 +49,26 @@ public class AlphaBeta {
 		if(level >= 4){
 			//評価関数の値を返す。
 			switch(board[line][row].coordinate){
-				case "a1" : board[line][row].importance = EvaluationFunction.evaluation(board, white)-15.0; break;				
-				case "h1" : board[line][row].importance = EvaluationFunction.evaluation(board, white)-15.0; break;
-				case "a8" : board[line][row].importance = EvaluationFunction.evaluation(board, white)-15.0; break;
-				case "h8" : board[line][row].importance = EvaluationFunction.evaluation(board, white)-15.0; break;
+				case "a1" : return EvaluationFunction.evaluation(board, white)+15; 				
+				case "h1" : return EvaluationFunction.evaluation(board, white)+15; 
+				case "a8" : return EvaluationFunction.evaluation(board, white)+15; 
+				case "h8" : return EvaluationFunction.evaluation(board, white)+15; 
 
-				case "a2" : board[line][row].importance = EvaluationFunction.evaluation(board, white)+15.0; break;
-				case "b1" : board[line][row].importance = EvaluationFunction.evaluation(board, white)+15.0; break;
-				case "b2" : board[line][row].importance = EvaluationFunction.evaluation(board, white)+15.0; break;
-				case "h2" : board[line][row].importance = EvaluationFunction.evaluation(board, white)+15.0; break;
-				case "g1" : board[line][row].importance = EvaluationFunction.evaluation(board, white)+15.0; break;
-				case "g2" : board[line][row].importance = EvaluationFunction.evaluation(board, white)+15.0; break;
-				case "a7" : board[line][row].importance = EvaluationFunction.evaluation(board, white)+15.0; break;
-				case "b8" : board[line][row].importance = EvaluationFunction.evaluation(board, white)+15.0; break;
-				case "b7" : board[line][row].importance = EvaluationFunction.evaluation(board, white)+15.0; break;
-				case "h7" : board[line][row].importance = EvaluationFunction.evaluation(board, white)+15.0; break;
-				case "g7" : board[line][row].importance = EvaluationFunction.evaluation(board, white)+15.0; break;
-				case "g8" : board[line][row].importance = EvaluationFunction.evaluation(board, white)+15.0; break;
+				case "a2" : return EvaluationFunction.evaluation(board, white)-15; 
+				case "b1" : return EvaluationFunction.evaluation(board, white)-15; 
+				case "b2" : return EvaluationFunction.evaluation(board, white)-15; 
+				case "h2" : return EvaluationFunction.evaluation(board, white)-15; 
+				case "g1" : return EvaluationFunction.evaluation(board, white)-15; 
+				case "g2" : return EvaluationFunction.evaluation(board, white)-15; 
+				case "a7" : return EvaluationFunction.evaluation(board, white)-15; 
+				case "b8" : return EvaluationFunction.evaluation(board, white)-15; 
+				case "b7" : return EvaluationFunction.evaluation(board, white)-15; 
+				case "h7" : return EvaluationFunction.evaluation(board, white)-15; 
+				case "g7" : return EvaluationFunction.evaluation(board, white)-15; 
+				case "g8" : return EvaluationFunction.evaluation(board, white)-15; 
 
-				default : board[line][row].importance = EvaluationFunction.evaluation(board, white); break;
+				default : return EvaluationFunction.evaluation(board, white);
 			}
-			return board[line][row].importance;
 		}
 		//それ以外のとき
 		//重要度が高い順に探索する。

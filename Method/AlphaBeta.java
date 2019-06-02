@@ -37,7 +37,6 @@ public class AlphaBeta {
 	}
 
 	private static double alphabeta(Board[][] board, int level, int line, int row,  double alpha, double beta,  boolean white){
-		System.out.println("level = " + level);
 		//局面がゲームの終わり
 		if(IfFinish.finish(board)){
 			switch(IfFinish.result(board, white)){

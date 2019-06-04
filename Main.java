@@ -113,18 +113,19 @@ OutPut.output(board);
 						}
 				if(check){
 				opponent = InputOpponentMove.inputopponentmove(board, !white);
-				}else{
-					System.out.println();
-					System.out.println("You can not put anywhere.....");
-					System.out.println();
-				}
-
 				//入力された相手の手の座標からboardを更新する。
 				SetBoard.setboard(board, opponent, !white);
 
 				//ボードの状態を表示する
 				OutPut.output(board);
 
+				}else{
+					System.out.println();
+					System.out.println("You can not put anywhere.....");
+					System.out.println();
+				}
+
+				
 			}
 			//もし局面がゲームの終わりになったとき break;
 			if(IfFinish.finish(board))

@@ -46,7 +46,7 @@ public class AlphaBeta {
 			}
 		}
 		//深さの限界に達したとき
-		if(level >= 4){
+		if(level >= 16){
 			//評価関数の値を返す。
 			switch(board[line][row].coordinate){
 				case "a1" : return EvaluationFunction.evaluation(board, white)+15; 				

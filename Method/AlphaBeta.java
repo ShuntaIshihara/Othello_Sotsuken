@@ -2,6 +2,17 @@ package Method;
 
 public class AlphaBeta {
 	public static String startsearch(Board[][] board, boolean white){
+		if(white){
+			if(board[0][0].whiteNextMove) return board[0][0].coordinate;
+			if(board[0][7].whiteNextMove) return board[0][7].coordinate;
+			if(board[7][0].whiteNextMove) return board[7][0].coordinate;
+			if(board[7][7].whiteNextMove) return board[7][7].coordinate;
+		}else{
+			if(board[0][0].blackNextMove) return board[0][0].coordinate;
+			if(board[0][7].blackNextMove) return board[0][7].coordinate;
+			if(board[7][0].blackNextMove) return board[7][0].coordinate;
+			if(board[7][7].blackNextMove) return board[7][7].coordinate;
+		}
 		//-----------------------------------------------------------
 		//探索用のデータ構造を用意する。
 		Board[][] probe = new Board[8][8];
@@ -31,12 +42,51 @@ public class AlphaBeta {
 		for(int i = 0; i < 8; i++)
 			for(int j = 0; j < 8; j++)
 				if(probe[i][j].move){
-					return board[i][j].coordinate;
+					if(!(i == 0 && j == 1) &&
+						!(i == 0 && j == 6) &&
+						!(i == 1 && j == 0) &&
+						!(i == 1 && j == 1) &&
+						!(i == 1 && j == 6) &&
+						!(i == 1 && j == 7) &&
+						!(i == 6 && j == 0) &&
+						!(i == 6 && j == 6) &&
+						!(i == 6 && j == 7) &&
+						!(i == 7 && j == 1) &&
+						!(i == 7 && j == 6))
+						return board[i][j].coordinate;
 				}
-		return null;	
+		for(int i = 0; i < 8; i++)
+			for(int j = 0; j < 8; j++){
+				if(!(i == 0 && j == 1) &&
+						!(i == 0 && j == 6) &&
+						!(i == 1 && j == 0) &&
+						!(i == 1 && j == 1) &&
+						!(i == 1 && j == 6) &&
+						!(i == 1 && j == 7) &&
+						!(i == 6 && j == 0) &&
+						!(i == 6 && j == 6) &&
+						!(i == 6 && j == 7) &&
+						!(i == 7 && j == 1) &&
+						!(i == 7 && j == 6)){
+					if(white){
+						if(board[i][j].whiteNextMove) return board[i][j].coordinate;
+					}else{
+						if(board[i][j].blackNextMove) return board[i][j].coordinate;
+					}
+				}else{
+					if(white){
+						if(board[i][j].whiteNextMove) return board[i][j].coordinate;
+					}else{
+						if(board[i][j].blackNextMove) return board[i][j].coordinate;
+					}
+				}
+			}
+
+		return null;
 	}
 
 	private static double alphabeta(Board[][] board, int level, int line, int row,  double alpha, double beta,  boolean white){
+		System.out.println("level = " + level);
 		//局面がゲームの終わり
 		if(IfFinish.finish(board)){
 			switch(IfFinish.result(board, white)){
@@ -46,7 +96,7 @@ public class AlphaBeta {
 			}
 		}
 		//深さの限界に達したとき
-		if(level >= 16){
+		if(level >= 4){
 			//評価関数の値を返す。
 			switch(board[line][row].coordinate){
 				case "a1" : return EvaluationFunction.evaluation(board, white)+15; 				

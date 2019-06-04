@@ -5,9 +5,9 @@ class EvaluationFunction extends MyEnum {
 		int w = 0;
 		for(int i = 0; i < 8; i++){
 			for(int j = 0; j < 8; j++){
-				if(board[i][j].blackNextMove)
+				if(board[i][j].state == State.Black)
 					b++;
-				else if(board[i][j].whiteNextMove)
+				else if(board[i][j].state == State.White)
 					w++;
 			}
 		}

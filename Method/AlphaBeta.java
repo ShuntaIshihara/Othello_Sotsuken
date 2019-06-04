@@ -76,14 +76,18 @@ public class AlphaBeta {
 					}else{
 						if(board[i][j].blackNextMove) return board[i][j].coordinate;
 					}
-				}else{								//角の周りしか置けないときはしかたなく置く
-					if(white){
+				}
+			}
+
+		for(int i = 0; i < 8; i++)
+			for(int j = 0; j < 8; j++){
+					if(white){ //角の周りしかおけないときは仕方なくおく
 						if(board[i][j].whiteNextMove) return board[i][j].coordinate;
 					}else{
 						if(board[i][j].blackNextMove) return board[i][j].coordinate;
 					}
 				}
-			}
+			
 
 		return null; //これが返されることはない（と思う...）
 	}

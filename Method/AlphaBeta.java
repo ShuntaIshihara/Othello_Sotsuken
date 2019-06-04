@@ -2,6 +2,7 @@ package Method;
 
 public class AlphaBeta {
 	public static String startsearch(Board[][] board, boolean white){
+		//角が取れるときはとにかく取る
 		if(white){
 			if(board[0][0].whiteNextMove) return board[0][0].coordinate;
 			if(board[0][7].whiteNextMove) return board[0][7].coordinate;
@@ -13,6 +14,8 @@ public class AlphaBeta {
 			if(board[7][0].blackNextMove) return board[7][0].coordinate;
 			if(board[7][7].blackNextMove) return board[7][7].coordinate;
 		}
+
+		//角が取れないとき
 		//-----------------------------------------------------------
 		//探索用のデータ構造を用意する。
 		Board[][] probe = new Board[8][8];
@@ -42,7 +45,7 @@ public class AlphaBeta {
 		for(int i = 0; i < 8; i++)
 			for(int j = 0; j < 8; j++)
 				if(probe[i][j].move){
-					if(!(i == 0 && j == 1) &&
+					if(!(i == 0 && j == 1) &&		//角の周りを取ろうとしたら避けるようにする。
 						!(i == 0 && j == 6) &&
 						!(i == 1 && j == 0) &&
 						!(i == 1 && j == 1) &&
@@ -57,7 +60,7 @@ public class AlphaBeta {
 				}
 		for(int i = 0; i < 8; i++)
 			for(int j = 0; j < 8; j++){
-				if(!(i == 0 && j == 1) &&
+				if(!(i == 0 && j == 1) &&			//角の周り以外で置けるところにとにかく置く
 						!(i == 0 && j == 6) &&
 						!(i == 1 && j == 0) &&
 						!(i == 1 && j == 1) &&
@@ -73,7 +76,7 @@ public class AlphaBeta {
 					}else{
 						if(board[i][j].blackNextMove) return board[i][j].coordinate;
 					}
-				}else{
+				}else{								//角の周りしか置けないときはしかたなく置く
 					if(white){
 						if(board[i][j].whiteNextMove) return board[i][j].coordinate;
 					}else{
@@ -82,14 +85,18 @@ public class AlphaBeta {
 				}
 			}
 
-		return null;
+		return null; //これが返されることはない（と思う...）
 	}
 
 	private static double alphabeta(Board[][] board, int level, int line, int row,  double alpha, double beta,  boolean white){
-		System.out.println("level = " + level);
 		//局面がゲームの終わり
 		if(IfFinish.finish(board)){
 			switch(IfFinish.result(board, white)){
+				//IfFinish.resultはそれぞれ
+				//自分が価値のとき　0
+				//引き分けのとき　　1
+				//まけのとき　　　　2
+				//を返す。
 				case 0 : return 1.0;
 				case 1 : return 0.0;
 				case 2 : return -1.0;
@@ -98,27 +105,7 @@ public class AlphaBeta {
 		//深さの限界に達したとき
 		if(level >= 4){
 			//評価関数の値を返す。
-			switch(board[line][row].coordinate){
-				case "a1" : return EvaluationFunction.evaluation(board, white)+15; 				
-				case "h1" : return EvaluationFunction.evaluation(board, white)+15; 
-				case "a8" : return EvaluationFunction.evaluation(board, white)+15; 
-				case "h8" : return EvaluationFunction.evaluation(board, white)+15; 
-
-				case "a2" : return EvaluationFunction.evaluation(board, white)-15; 
-				case "b1" : return EvaluationFunction.evaluation(board, white)-15; 
-				case "b2" : return EvaluationFunction.evaluation(board, white)-15; 
-				case "h2" : return EvaluationFunction.evaluation(board, white)-15; 
-				case "g1" : return EvaluationFunction.evaluation(board, white)-15; 
-				case "g2" : return EvaluationFunction.evaluation(board, white)-15; 
-				case "a7" : return EvaluationFunction.evaluation(board, white)-15; 
-				case "b8" : return EvaluationFunction.evaluation(board, white)-15; 
-				case "b7" : return EvaluationFunction.evaluation(board, white)-15; 
-				case "h7" : return EvaluationFunction.evaluation(board, white)-15; 
-				case "g7" : return EvaluationFunction.evaluation(board, white)-15; 
-				case "g8" : return EvaluationFunction.evaluation(board, white)-15; 
-
-				default : return EvaluationFunction.evaluation(board, white);
-			}
+			return EvaluationFunction.evaluation(board, white);
 		}
 		//それ以外のとき
 		//重要度が高い順に探索する。
@@ -128,7 +115,7 @@ public class AlphaBeta {
 			sort[i] = null;
 		}
 		double m = alpha;
-		if(level % 2 == 0){
+		if(level % 2 == 0){		//自分のとき
 			MySort.descending(board, sort, white);
 			BP:for(int i = 0; sort[i] != null; i++){
 				SetBoard.setboard(board, sort[i], white);
@@ -147,12 +134,13 @@ public class AlphaBeta {
 			}
 			for(int i = 0; i < 8; i++)
 				for(int j = 0; j < 8; j++)
-					board[i][j].move = false;
-			board[line][row].move = true;
+					board[i][j].move = false; //最適解を一つだけ求めるために他のものはfalseにしておく
+			board[line][row].move = true;		//最適解にtrueを入れる。
 			board[line][row].importance = m;
 			return board[line][row].importance;
 		}
 
+		//相手のとき
 		MySort.ascending(board, sort, white);
 		BP:for(int i = 0; sort[i] != null; i++){
 			SetBoard.setboard(board, sort[i], white);
